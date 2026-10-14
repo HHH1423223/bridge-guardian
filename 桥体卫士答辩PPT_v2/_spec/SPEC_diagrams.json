@@ -1,0 +1,4999 @@
+{
+ "_doc": "桥体卫士答辩 PPT v2 —— 15 个矢量图形几何（图形负责人 B / task-2）。零位图：仅 rect / line / text / chart。坐标为绝对 EMU，整数。line 元素按 DIAGRAM_SPEC §1 只给 points（绝对坐标），不给 x/y/w/h。",
+ "_canvas_rule": "canvas 与 task-1（content-writer）layout_map 完全一致；video_slots 的 canvas 按 Lead 最终坐标取 4 个元素的并集外框。standard 页（s02-s13）元素全部落在 x∈[685800,11506200]、y∈[1188720,6035040]，且不进入页眉标题列（x≤5000000 且 y≤1005840）。",
+ "figures": [
+  {
+   "fig_id": "cover_geo",
+   "for_slide": "s01_cover",
+   "canvas": {
+    "x": 0,
+    "y": 0,
+    "w": 12192000,
+    "h": 6858000
+   },
+   "_note": "封面几何底图（chrome=none，可铺满整页）：右侧深蓝大色块 + 左下块状细网格 + 左侧强调条。不放任何文字（标题由构建脚本渲染，压在这些底块之上属于「底卡包含上层文字」）。",
+   "elements": [
+    {
+     "id": "cv_panel",
+     "type": "rect",
+     "x": 9830000,
+     "y": 0,
+     "w": 2362000,
+     "h": 6858000,
+     "z": 1,
+     "fill": "navy_deep",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_bar_teal",
+     "type": "rect",
+     "x": 685800,
+     "y": 762000,
+     "w": 914400,
+     "h": 228600,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_bar_navy",
+     "type": "rect",
+     "x": 685800,
+     "y": 1110600,
+     "w": 457200,
+     "h": 228600,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_spine",
+     "type": "rect",
+     "x": 685800,
+     "y": 2286000,
+     "w": 152400,
+     "h": 1828800,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m00",
+     "type": "rect",
+     "x": 685800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m01",
+     "type": "rect",
+     "x": 1105800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m02",
+     "type": "rect",
+     "x": 1525800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m03",
+     "type": "rect",
+     "x": 1945800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m04",
+     "type": "rect",
+     "x": 2365800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m05",
+     "type": "rect",
+     "x": 2785800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m06",
+     "type": "rect",
+     "x": 3205800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m07",
+     "type": "rect",
+     "x": 3625800,
+     "y": 6138000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m10",
+     "type": "rect",
+     "x": 685800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m11",
+     "type": "rect",
+     "x": 1105800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m12",
+     "type": "rect",
+     "x": 1525800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m13",
+     "type": "rect",
+     "x": 1945800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m14",
+     "type": "rect",
+     "x": 2365800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m15",
+     "type": "rect",
+     "x": 2785800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m16",
+     "type": "rect",
+     "x": 3205800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    },
+    {
+     "id": "cv_m17",
+     "type": "rect",
+     "x": 3625800,
+     "y": 6558000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    }
+   ]
+  },
+  {
+   "fig_id": "pain_compare",
+   "for_slide": "s02_pain",
+   "canvas": {
+    "x": 685800,
+    "y": 1400000,
+    "w": 5700000,
+    "h": 4200000
+   },
+   "_note": "左「传统桥梁监测的难」↔ 右「缩尺原型方案」，中间转折箭头，底部定位条。左右卡片完全对称（各 2.5M 宽），中间 700K 留白给箭头与标签。",
+   "elements": [
+    {
+     "id": "pc_card_l",
+     "type": "rect",
+     "x": 685800,
+     "y": 1400000,
+     "w": 2500000,
+     "h": 3200000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "pc_card_r",
+     "type": "rect",
+     "x": 3885800,
+     "y": 1400000,
+     "w": 2500000,
+     "h": 3200000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "pc_h_l",
+     "type": "text",
+     "x": 838200,
+     "y": 1540000,
+     "w": 2195200,
+     "h": 320000,
+     "z": 3,
+     "text": "传统桥梁监测的难",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_h_r",
+     "type": "text",
+     "x": 4038200,
+     "y": 1540000,
+     "w": 2195200,
+     "h": 320000,
+     "z": 3,
+     "text": "缩尺原型方案",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_l1",
+     "type": "text",
+     "x": 838200,
+     "y": 2150000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "设备昂贵",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_l2",
+     "type": "text",
+     "x": 838200,
+     "y": 2700000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "部署困难",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_l3",
+     "type": "text",
+     "x": 838200,
+     "y": 3250000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "依赖专业标定",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_l4",
+     "type": "text",
+     "x": 838200,
+     "y": 3800000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "数据难复现",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_l5",
+     "type": "text",
+     "x": 838200,
+     "y": 4300000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "→ 现场无法复现",
+     "font": "small",
+     "color": "orange",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_r1",
+     "type": "text",
+     "x": 4038200,
+     "y": 2150000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "低成本，无需硬件",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_r2",
+     "type": "text",
+     "x": 4038200,
+     "y": 2700000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "可演示：现场直接跑",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_r3",
+     "type": "text",
+     "x": 4038200,
+     "y": 3250000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "可复现：一键切换场景",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_r4",
+     "type": "text",
+     "x": 4038200,
+     "y": 3800000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "软件全链路可跑通",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_r5",
+     "type": "text",
+     "x": 4038200,
+     "y": 4300000,
+     "w": 2195200,
+     "h": 228600,
+     "z": 3,
+     "text": "→ 答辩现场即可跑通",
+     "font": "small",
+     "color": "teal",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_arrow",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3265800,
+       3000000
+      ],
+      [
+       3705800,
+       3000000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2,
+     "arrow": true
+    },
+    {
+     "id": "pc_mid",
+     "type": "text",
+     "x": 3185800,
+     "y": 2400000,
+     "w": 700000,
+     "h": 228600,
+     "z": 3,
+     "text": "换一条路",
+     "font": "small",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "pc_band",
+     "type": "rect",
+     "x": 685800,
+     "y": 5250000,
+     "w": 5700000,
+     "h": 350000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "none",
+     "radius": 0.06
+    },
+    {
+     "id": "pc_band_t",
+     "type": "text",
+     "x": 800000,
+     "y": 5250000,
+     "w": 5471600,
+     "h": 350000,
+     "z": 3,
+     "text": "定位：缩尺原型 + 软件全链路演示",
+     "font": "body",
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "arch6",
+   "for_slide": "s03_arch",
+   "canvas": {
+    "x": 6100000,
+    "y": 1400000,
+    "w": 5406200,
+    "h": 4300000
+   },
+   "_note": "六层架构竖向堆叠，层间箭头表示数据自下而上。采集层（第 2 层）用 teal 高亮底 + 右侧「可插拔」标签，突出 DataSource 抽象是可替换点。",
+   "elements": [
+    {
+     "id": "ar_bar1",
+     "type": "rect",
+     "x": 6100000,
+     "y": 1520000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_bar2",
+     "type": "rect",
+     "x": 6100000,
+     "y": 2220000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "teal",
+     "line_width": 2,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_bar3",
+     "type": "rect",
+     "x": 6100000,
+     "y": 2920000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_bar4",
+     "type": "rect",
+     "x": 6100000,
+     "y": 3620000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_bar5",
+     "type": "rect",
+     "x": 6100000,
+     "y": 4320000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_bar6",
+     "type": "rect",
+     "x": 6100000,
+     "y": 5020000,
+     "w": 5406200,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ar_n1",
+     "type": "text",
+     "x": 6252400,
+     "y": 1640000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "硬件层",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_n2",
+     "type": "text",
+     "x": 6252400,
+     "y": 2340000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "采集层",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_n3",
+     "type": "text",
+     "x": 6252400,
+     "y": 3040000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "规则引擎",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_n4",
+     "type": "text",
+     "x": 6252400,
+     "y": 3740000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "数据层",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_n5",
+     "type": "text",
+     "x": 6252400,
+     "y": 4440000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "服务层",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_n6",
+     "type": "text",
+     "x": 6252400,
+     "y": 5140000,
+     "w": 1650000,
+     "h": 320000,
+     "z": 3,
+     "text": "展示层",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d1",
+     "type": "text",
+     "x": 8050000,
+     "y": 1685700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "ESP32 + 传感器（现场不接实物）",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d2",
+     "type": "text",
+     "x": 8050000,
+     "y": 2385700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "DataSource：sim|serial 可插拔",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d3",
+     "type": "text",
+     "x": 8050000,
+     "y": 3085700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "6 类可解释规则 · 滞回防刷屏",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d4",
+     "type": "text",
+     "x": 8050000,
+     "y": 3785700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "SQLite 五表 + 3 个时间索引",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d5",
+     "type": "text",
+     "x": 8050000,
+     "y": 4485700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "Flask 19 条路由 · 统一鉴权",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_d6",
+     "type": "text",
+     "x": 8050000,
+     "y": 5185700,
+     "w": 2300000,
+     "h": 228600,
+     "z": 3,
+     "text": "三维场景 + 大屏 + 手机趋势页",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_tag",
+     "type": "rect",
+     "x": 10500000,
+     "y": 2340000,
+     "w": 950000,
+     "h": 320000,
+     "z": 2,
+     "fill": "teal",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "ar_tag_t",
+     "type": "text",
+     "x": 10500000,
+     "y": 2340000,
+     "w": 950000,
+     "h": 320000,
+     "z": 3,
+     "text": "可插拔",
+     "font": "small",
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "ar_a1",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8803100,
+       2080000
+      ],
+      [
+       8803100,
+       2220000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ar_a2",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8803100,
+       2780000
+      ],
+      [
+       8803100,
+       2920000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ar_a3",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8803100,
+       3480000
+      ],
+      [
+       8803100,
+       3620000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ar_a4",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8803100,
+       4180000
+      ],
+      [
+       8803100,
+       4320000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ar_a5",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8803100,
+       4880000
+      ],
+      [
+       8803100,
+       5020000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    }
+   ]
+  },
+  {
+   "fig_id": "source_switch",
+   "for_slide": "s04_source",
+   "canvas": {
+    "x": 685800,
+    "y": 1400000,
+    "w": 5700000,
+    "h": 4300000
+   },
+   "_note": "DATA_SOURCE 分叉开关 → 左「模拟模式」/ 右「串口模式」，底部深色结论条写明「断线如实离线」。行文全部来自 datasource.py（6 场景、围绕 80、心跳/超时计数/最近错误、三态）。",
+   "elements": [
+    {
+     "id": "ss_node",
+     "type": "rect",
+     "x": 2335800,
+     "y": 1400000,
+     "w": 2400000,
+     "h": 400000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none",
+     "radius": 0.2
+    },
+    {
+     "id": "ss_node_t",
+     "type": "text",
+     "x": 2335800,
+     "y": 1400000,
+     "w": 2400000,
+     "h": 400000,
+     "z": 3,
+     "text": "DATA_SOURCE",
+     "font": "small",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_trunk",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3535800,
+       1800000
+      ],
+      [
+       3535800,
+       2020000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5
+    },
+    {
+     "id": "ss_br_l",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3535800,
+       2010000
+      ],
+      [
+       1985800,
+       2010000
+      ],
+      [
+       1985800,
+       2200000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ss_br_r",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3535800,
+       2010000
+      ],
+      [
+       5085800,
+       2010000
+      ],
+      [
+       5085800,
+       2200000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "ss_card_l",
+     "type": "rect",
+     "x": 685800,
+     "y": 2200000,
+     "w": 2700000,
+     "h": 2700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ss_card_r",
+     "type": "rect",
+     "x": 3685800,
+     "y": 2200000,
+     "w": 2700000,
+     "h": 2700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "ss_h_l",
+     "type": "text",
+     "x": 838200,
+     "y": 2340000,
+     "w": 2394400,
+     "h": 320000,
+     "z": 3,
+     "text": "模拟模式 · sim",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_h_r",
+     "type": "text",
+     "x": 3838200,
+     "y": 2340000,
+     "w": 2394400,
+     "h": 320000,
+     "z": 3,
+     "text": "串口模式 · serial",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_l1",
+     "type": "text",
+     "x": 838200,
+     "y": 2780000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "6 个场景一键切换",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_l2",
+     "type": "text",
+     "x": 838200,
+     "y": 3260000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "正常/预警/报警/严重/离线/恢复",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_l3",
+     "type": "text",
+     "x": 838200,
+     "y": 3740000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "大屏常显模拟演示水印",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_l4",
+     "type": "text",
+     "x": 838200,
+     "y": 4220000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "围绕 80 波动，始终在线",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_r1",
+     "type": "text",
+     "x": 3838200,
+     "y": 2780000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "心跳时间戳持续更新",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_r2",
+     "type": "text",
+     "x": 3838200,
+     "y": 3260000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "连续超时计数 ≥ 10 → 离线",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_r3",
+     "type": "text",
+     "x": 3838200,
+     "y": 3740000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "最近错误原因原样透出",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_r4",
+     "type": "text",
+     "x": 3838200,
+     "y": 4220000,
+     "w": 2394400,
+     "h": 228600,
+     "z": 3,
+     "text": "三态：未连接/在线/离线",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "ss_band",
+     "type": "rect",
+     "x": 685800,
+     "y": 5100000,
+     "w": 5700000,
+     "h": 440000,
+     "z": 1,
+     "fill": "ink",
+     "line_color": "none",
+     "radius": 0.04
+    },
+    {
+     "id": "ss_band_t",
+     "type": "text",
+     "x": 800000,
+     "y": 5100000,
+     "w": 5471600,
+     "h": 440000,
+     "z": 3,
+     "text": "断线如实「设备离线」 · 不伪造数据、不沿用旧值",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "twin_wire",
+   "for_slide": "s05_scene",
+   "canvas": {
+    "x": 685800,
+    "y": 1188720,
+    "w": 6708648,
+    "h": 3780129
+   },
+   "_note": "花江峡谷大桥线框示意（主跨 1420 m 双塔单跨钢桁梁悬索桥）：两塔 + 主缆（抛物线折线 9 段）+ 11 根吊索 + 桥面/桁架下弦 + 峡谷两岸与江面，桥体用 slate/navy 描线，5 个测点用 teal 小圆点（4 个贴在桥面上、1 个贴在主缆跨中下缘，均为 0 面积相切，不压线）。主缆按 spec.js 的垂跨比 1/10 与 245+1420+495 缆跨比例取点（横向等比，纵向放大以便读出峡谷纵深）。占左侧 62% 宽、上 78% 高，右下留白给 KPI 卡。",
+   "elements": [
+    {
+     "id": "tw_wall_l",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1546000,
+       2398720
+      ],
+      [
+       2750000,
+       4618720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 1.5
+    },
+    {
+     "id": "tw_river",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       2750000,
+       4618720
+      ],
+      [
+       4550000,
+       4618720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 1,
+     "dash": true
+    },
+    {
+     "id": "tw_wall_r",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4550000,
+       4618720
+      ],
+      [
+       5753000,
+       2298720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 1.5
+    },
+    {
+     "id": "tw_rim_n",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       760000,
+       2398720
+      ],
+      [
+       1546000,
+       2398720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 1
+    },
+    {
+     "id": "tw_rim_s",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5753000,
+       2298720
+      ],
+      [
+       7300000,
+       2298720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 1
+    },
+    {
+     "id": "tw_tower_n",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1546000,
+       1438720
+      ],
+      [
+       1546000,
+       2398720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2
+    },
+    {
+     "id": "tw_tower_s",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5753000,
+       1438720
+      ],
+      [
+       5753000,
+       2298720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2
+    },
+    {
+     "id": "tw_cap_n",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1488000,
+       1438720
+      ],
+      [
+       1604000,
+       1438720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2
+    },
+    {
+     "id": "tw_cap_s",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5695000,
+       1438720
+      ],
+      [
+       5811000,
+       1438720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2
+    },
+    {
+     "id": "tw_back_n",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       820000,
+       2398720
+      ],
+      [
+       1546000,
+       1438720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5
+    },
+    {
+     "id": "tw_back_s",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5753000,
+       1438720
+      ],
+      [
+       7220000,
+       2298720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5
+    },
+    {
+     "id": "tw_cable",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1546000,
+       1438720
+      ],
+      [
+       2013444,
+       1663115
+      ],
+      [
+       2480889,
+       1831411
+      ],
+      [
+       2948333,
+       1943609
+      ],
+      [
+       3415778,
+       1999708
+      ],
+      [
+       3883222,
+       1999708
+      ],
+      [
+       4350667,
+       1943609
+      ],
+      [
+       4818111,
+       1831411
+      ],
+      [
+       5285556,
+       1663115
+      ],
+      [
+       5753000,
+       1438720
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2
+    },
+    {
+     "id": "tw_h01",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1896583,
+       1607016
+      ],
+      [
+       1896583,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h02",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       2247167,
+       1747263
+      ],
+      [
+       2247167,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h03",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       2597750,
+       1859460
+      ],
+      [
+       2597750,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h04",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       2948333,
+       1943609
+      ],
+      [
+       2948333,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h05",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       3298917,
+       1985683
+      ],
+      [
+       3298917,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h06",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       3649500,
+       1999708
+      ],
+      [
+       3649500,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h07",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4000083,
+       1985683
+      ],
+      [
+       4000083,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h08",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4350667,
+       1943609
+      ],
+      [
+       4350667,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h09",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4701250,
+       1859460
+      ],
+      [
+       4701250,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h10",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5051833,
+       1747263
+      ],
+      [
+       5051833,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_h11",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5402417,
+       1607016
+      ],
+      [
+       5402417,
+       2118720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_deck",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       820000,
+       2118720
+      ],
+      [
+       7300000,
+       2118720
+      ]
+     ],
+     "line_color": "slate",
+     "line_width": 2.5
+    },
+    {
+     "id": "tw_chord",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       900000,
+       2178720
+      ],
+      [
+       7180000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s1",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1200000,
+       2118720
+      ],
+      [
+       1200000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s2",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       1800000,
+       2118720
+      ],
+      [
+       1800000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s3",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       2700000,
+       2118720
+      ],
+      [
+       2700000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s4",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       3500000,
+       2118720
+      ],
+      [
+       3500000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s5",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4100000,
+       2118720
+      ],
+      [
+       4100000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s6",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       4800000,
+       2118720
+      ],
+      [
+       4800000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s7",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       5500000,
+       2118720
+      ],
+      [
+       5500000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s8",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       6100000,
+       2118720
+      ],
+      [
+       6100000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_s9",
+     "type": "line",
+     "z": 1,
+     "points": [
+      [
+       6700000,
+       2118720
+      ],
+      [
+       6700000,
+       2178720
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1
+    },
+    {
+     "id": "tw_pt1",
+     "type": "rect",
+     "x": 1606991,
+     "y": 1890120,
+     "w": 228600,
+     "h": 228600,
+     "z": 2,
+     "shape": "oval",
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tw_pt2",
+     "type": "rect",
+     "x": 2308158,
+     "y": 1890120,
+     "w": 228600,
+     "h": 228600,
+     "z": 2,
+     "shape": "oval",
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tw_pt3",
+     "type": "rect",
+     "x": 5112825,
+     "y": 1890120,
+     "w": 228600,
+     "h": 228600,
+     "z": 2,
+     "shape": "oval",
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tw_pt4",
+     "type": "rect",
+     "x": 5463408,
+     "y": 1890120,
+     "w": 228600,
+     "h": 228600,
+     "z": 2,
+     "shape": "oval",
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tw_pt5",
+     "type": "rect",
+     "x": 3710491,
+     "y": 1761400,
+     "w": 228600,
+     "h": 228600,
+     "z": 2,
+     "shape": "oval",
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tw_lab_cable",
+     "type": "text",
+     "x": 2600000,
+     "y": 1560000,
+     "w": 760000,
+     "h": 228600,
+     "z": 3,
+     "text": "主缆",
+     "font": "small",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "tw_lab_span",
+     "type": "text",
+     "x": 3100000,
+     "y": 4700000,
+     "w": 1100000,
+     "h": 228600,
+     "z": 3,
+     "text": "主跨 1420 m",
+     "font": "small",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "video_slots",
+   "for_slide": "s06_video",
+   "canvas": {
+    "x": 1188720,
+    "y": 1330000,
+    "w": 7528560,
+    "h": 4658600
+   },
+   "_note": "严格按 Lead 最终坐标（覆盖 SPEC_s06_video.md 早期版本）；4 个元素的并集外框即 canvas（底边 5988600 ≤ 6035040）。video_play 完全落在 video_frame 内（frame z=1 更小、范围更大 = 底卡包含）。",
+   "elements": [
+    {
+     "id": "video_frame",
+     "type": "rect",
+     "x": 1188720,
+     "y": 1330000,
+     "w": 7528560,
+     "h": 4000000,
+     "z": 1,
+     "fill": "ink",
+     "line_color": "blue",
+     "line_width": 1.5,
+     "radius": 0.02
+    },
+    {
+     "id": "video_play",
+     "type": "rect",
+     "x": 4754880,
+     "y": 3130000,
+     "w": 685800,
+     "h": 381000,
+     "z": 2,
+     "fill": "teal",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "video_hint",
+     "type": "text",
+     "x": 1188720,
+     "y": 5500000,
+     "w": 7528560,
+     "h": 228600,
+     "z": 3,
+     "text": "▶ 占位框内插入演示录屏（1 分钟，16:9，无硬件实物）",
+     "font": "small",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "video_flow",
+     "type": "text",
+     "x": 1188720,
+     "y": 5760000,
+     "w": 7528560,
+     "h": 228600,
+     "z": 3,
+     "text": "模拟数据源 → 分级报警 → 确认处置 → 历史追溯 → 如实离线",
+     "font": "small",
+     "color": "slate",
+     "align": "center",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "risk_link",
+   "for_slide": "s07_risk",
+   "canvas": {
+    "x": 5300000,
+    "y": 1400000,
+    "w": 6206200,
+    "h": 4300000
+   },
+   "_note": "风险四级联动：绿/琥珀/橙/红四张等级卡（数字口径 = 阈值 120.0 × 1.1 = 132 / × 1.2 = 144，来自 rules.py::_level）+ 同色示意波形折线（含 red 虚线阈值 120 与四段分级色带）。波形明确标注「示意」，不是实测数据。",
+   "elements": [
+    {
+     "id": "rl_c1",
+     "type": "rect",
+     "x": 5303000,
+     "y": 1400000,
+     "w": 1505000,
+     "h": 1000000,
+     "z": 1,
+     "fill": "green",
+     "line_color": "none",
+     "radius": 0.06
+    },
+    {
+     "id": "rl_c2",
+     "type": "rect",
+     "x": 6868000,
+     "y": 1400000,
+     "w": 1505000,
+     "h": 1000000,
+     "z": 1,
+     "fill": "amber",
+     "line_color": "none",
+     "radius": 0.06
+    },
+    {
+     "id": "rl_c3",
+     "type": "rect",
+     "x": 8433000,
+     "y": 1400000,
+     "w": 1505000,
+     "h": 1000000,
+     "z": 1,
+     "fill": "orange",
+     "line_color": "none",
+     "radius": 0.06
+    },
+    {
+     "id": "rl_c4",
+     "type": "rect",
+     "x": 9998000,
+     "y": 1400000,
+     "w": 1505000,
+     "h": 1000000,
+     "z": 1,
+     "fill": "red",
+     "line_color": "none",
+     "radius": 0.06
+    },
+    {
+     "id": "rl_c1n",
+     "type": "text",
+     "x": 5383000,
+     "y": 1500000,
+     "w": 1345000,
+     "h": 320000,
+     "z": 3,
+     "text": "正常",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c2n",
+     "type": "text",
+     "x": 6948000,
+     "y": 1500000,
+     "w": 1345000,
+     "h": 320000,
+     "z": 3,
+     "text": "预警",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c3n",
+     "type": "text",
+     "x": 8513000,
+     "y": 1500000,
+     "w": 1345000,
+     "h": 320000,
+     "z": 3,
+     "text": "报警",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c4n",
+     "type": "text",
+     "x": 10078000,
+     "y": 1500000,
+     "w": 1345000,
+     "h": 320000,
+     "z": 3,
+     "text": "严重报警",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c1v",
+     "type": "text",
+     "x": 5383000,
+     "y": 1920000,
+     "w": 1345000,
+     "h": 228600,
+     "z": 3,
+     "text": "≤ 120",
+     "font": "small",
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c2v",
+     "type": "text",
+     "x": 6948000,
+     "y": 1920000,
+     "w": 1345000,
+     "h": 228600,
+     "z": 3,
+     "text": "> 120",
+     "font": "small",
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c3v",
+     "type": "text",
+     "x": 8513000,
+     "y": 1920000,
+     "w": 1345000,
+     "h": 228600,
+     "z": 3,
+     "text": "≥ 132",
+     "font": "small",
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_c4v",
+     "type": "text",
+     "x": 10078000,
+     "y": 1920000,
+     "w": 1345000,
+     "h": 228600,
+     "z": 3,
+     "text": "≥ 144",
+     "font": "small",
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rl_chart",
+     "type": "chart",
+     "x": 5450000,
+     "y": 2700000,
+     "w": 6056200,
+     "h": 1900000,
+     "z": 1,
+     "chart_type": "line",
+     "font_size": 11,
+     "categories": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+     ],
+     "series": [
+      {
+       "name": "示意波形",
+       "values": [
+        78,
+        84,
+        80,
+        88,
+        96,
+        112,
+        124,
+        133,
+        141,
+        152,
+        146,
+        128
+       ],
+       "color": "teal",
+       "dash": false
+      }
+     ],
+     "y_min": 60,
+     "y_max": 180,
+     "ref_lines": [
+      {
+       "value": 120,
+       "color": "red",
+       "label": "阈值 120",
+       "dash": true
+      }
+     ],
+     "bands": [
+      {
+       "from": 60,
+       "to": 120,
+       "color": "green",
+       "alpha": 0.08
+      },
+      {
+       "from": 120,
+       "to": 132,
+       "color": "amber",
+       "alpha": 0.1
+      },
+      {
+       "from": 132,
+       "to": 144,
+       "color": "orange",
+       "alpha": 0.1
+      },
+      {
+       "from": 144,
+       "to": 180,
+       "color": "red",
+       "alpha": 0.1
+      }
+     ],
+     "x_label": "采样点（1 s 周期，示意）",
+     "y_label": "相对应变指标"
+    },
+    {
+     "id": "rl_band",
+     "type": "rect",
+     "x": 5300000,
+     "y": 4950000,
+     "w": 6206200,
+     "h": 440000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "none",
+     "radius": 0.04
+    },
+    {
+     "id": "rl_band_t",
+     "type": "text",
+     "x": 5420000,
+     "y": 4950000,
+     "w": 5966200,
+     "h": 440000,
+     "z": 3,
+     "text": "等级 → 颜色 → 处置优先级",
+     "font": "body",
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "rules_matrix",
+   "for_slide": "s08_rules",
+   "canvas": {
+    "x": 685800,
+    "y": 1350000,
+    "w": 10820400,
+    "h": 3350000
+   },
+   "_note": "6 类规则 3 行 × 2 列卡片：规则名 + 触发条件 + 一条示例 reason + 触发机制标签。参数全部取 rules.py 默认值（threshold=120.0 / rate_limit=10.0 / duration_points=5 / volatility_window=10 / volatility_limit=30.0 / baseline_window=30 / drift_limit=20.0 / offline_after=10），reason 文案沿用 rules.py 与 app.py 的格式。",
+   "elements": [
+    {
+     "id": "rm_c1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1350000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_c2",
+     "type": "rect",
+     "x": 6156000,
+     "y": 1350000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_c3",
+     "type": "rect",
+     "x": 685800,
+     "y": 2486000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_c4",
+     "type": "rect",
+     "x": 6156000,
+     "y": 2486000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_c5",
+     "type": "rect",
+     "x": 685800,
+     "y": 3622000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_c6",
+     "type": "rect",
+     "x": 6156000,
+     "y": 3622000,
+     "w": 5350200,
+     "h": 1046000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "rm_n1",
+     "type": "text",
+     "x": 838200,
+     "y": 1420000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "阈值超限",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_n2",
+     "type": "text",
+     "x": 6308400,
+     "y": 1420000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "变化率突变",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_n3",
+     "type": "text",
+     "x": 838200,
+     "y": 2556000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "持续超限",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_n4",
+     "type": "text",
+     "x": 6308400,
+     "y": 2556000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "短时波动",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_n5",
+     "type": "text",
+     "x": 838200,
+     "y": 3692000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "基线偏移",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_n6",
+     "type": "text",
+     "x": 6308400,
+     "y": 3692000,
+     "w": 3900000,
+     "h": 300000,
+     "z": 3,
+     "text": "设备离线",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_t1",
+     "type": "rect",
+     "x": 4883600,
+     "y": 1410000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_t2",
+     "type": "rect",
+     "x": 10353800,
+     "y": 1410000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_t3",
+     "type": "rect",
+     "x": 4883600,
+     "y": 2546000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_t4",
+     "type": "rect",
+     "x": 10353800,
+     "y": 2546000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_t5",
+     "type": "rect",
+     "x": 4883600,
+     "y": 3682000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_t6",
+     "type": "rect",
+     "x": 10353800,
+     "y": 3682000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 2,
+     "fill": "blue_soft",
+     "line_color": "none",
+     "radius": 0.5
+    },
+    {
+     "id": "rm_tt1",
+     "type": "text",
+     "x": 4883600,
+     "y": 1410000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "边沿触发",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_tt2",
+     "type": "text",
+     "x": 10353800,
+     "y": 1410000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "瞬时事件",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_tt3",
+     "type": "text",
+     "x": 4883600,
+     "y": 2546000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "持续判定",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_tt4",
+     "type": "text",
+     "x": 10353800,
+     "y": 2546000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "滞回",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_tt5",
+     "type": "text",
+     "x": 4883600,
+     "y": 3682000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "滞回",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_tt6",
+     "type": "text",
+     "x": 10353800,
+     "y": 3682000,
+     "w": 1000000,
+     "h": 320000,
+     "z": 3,
+     "text": "设备事件",
+     "font": "small",
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k1",
+     "type": "text",
+     "x": 838200,
+     "y": 1740000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "值 > 阈值 120.0：进入超限的瞬间报一次",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k2",
+     "type": "text",
+     "x": 6308400,
+     "y": 1740000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "单周期 |Δ| ≥ 10.0：瞬时事件",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k3",
+     "type": "text",
+     "x": 838200,
+     "y": 2876000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "连续 5 个采样点超阈值：只报一次",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k4",
+     "type": "text",
+     "x": 6308400,
+     "y": 2876000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "近 10 点峰谷差 ≥ 30.0：滞回防刷屏",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k5",
+     "type": "text",
+     "x": 838200,
+     "y": 4012000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "近 30 点前半/后半均值偏移 ≥ 20.0",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_k6",
+     "type": "text",
+     "x": 6308400,
+     "y": 4012000,
+     "w": 5045400,
+     "h": 290000,
+     "z": 3,
+     "text": "连续心跳超时 ≥ 10 次：如实判离线",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r1",
+     "type": "text",
+     "x": 838200,
+     "y": 2050000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "应变指标 132.40 超过阈值 120.00（相对应变指标，无量纲）",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r2",
+     "type": "text",
+     "x": 6308400,
+     "y": 2050000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "单周期变化 +12.35，超过变化率阈值 ±10.00（相对应变指标）",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r3",
+     "type": "text",
+     "x": 838200,
+     "y": 3186000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "连续 5 个采样点超过阈值 120.00（相对应变指标）",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r4",
+     "type": "text",
+     "x": 6308400,
+     "y": 3186000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "近 10 点峰谷差 41.20，超过波动阈值 30.00（相对应变指标）",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r5",
+     "type": "text",
+     "x": 838200,
+     "y": 4322000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "近期均值 118.60 相对基线 96.10 偏移 +22.50，超过阈值 20.00",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "rm_r6",
+     "type": "text",
+     "x": 6308400,
+     "y": 4322000,
+     "w": 5045400,
+     "h": 228600,
+     "z": 3,
+     "text": "设备失去连接：心跳超时",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "loop_ring",
+   "for_slide": "s09_loop",
+   "canvas": {
+    "x": 685800,
+    "y": 1450000,
+    "w": 4700000,
+    "h": 4200000
+   },
+   "_note": "7 段闭环回路（上排 4 段向右、下排 3 段向左、左右两侧竖向回程），7 条箭头首尾相接成闭环；中心放深色说明卡（不含结论金句，金句在 s13/s14）。",
+   "elements": [
+    {
+     "id": "lp_t1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1500000,
+     "w": 1100000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_t2",
+     "type": "rect",
+     "x": 1885800,
+     "y": 1500000,
+     "w": 1100000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_t3",
+     "type": "rect",
+     "x": 3085800,
+     "y": 1500000,
+     "w": 1100000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_t4",
+     "type": "rect",
+     "x": 4285800,
+     "y": 1500000,
+     "w": 1100000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_b1",
+     "type": "rect",
+     "x": 685800,
+     "y": 5090000,
+     "w": 1430000,
+     "h": 560000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_b2",
+     "type": "rect",
+     "x": 2320800,
+     "y": 5090000,
+     "w": 1430000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_b3",
+     "type": "rect",
+     "x": 3955800,
+     "y": 5090000,
+     "w": 1430000,
+     "h": 560000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "lp_t1t",
+     "type": "text",
+     "x": 765800,
+     "y": 1500000,
+     "w": 940000,
+     "h": 560000,
+     "z": 3,
+     "text": "报警产生",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_t2t",
+     "type": "text",
+     "x": 1965800,
+     "y": 1500000,
+     "w": 940000,
+     "h": 560000,
+     "z": 3,
+     "text": "分级着色",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_t3t",
+     "type": "text",
+     "x": 3165800,
+     "y": 1500000,
+     "w": 940000,
+     "h": 560000,
+     "z": 3,
+     "text": "确认处置",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_t4t",
+     "type": "text",
+     "x": 4365800,
+     "y": 1500000,
+     "w": 940000,
+     "h": 560000,
+     "z": 3,
+     "text": "状态变更",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_b1t",
+     "type": "text",
+     "x": 765800,
+     "y": 5090000,
+     "w": 1270000,
+     "h": 560000,
+     "z": 3,
+     "text": "设备恢复记录",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_b2t",
+     "type": "text",
+     "x": 2400800,
+     "y": 5090000,
+     "w": 1270000,
+     "h": 560000,
+     "z": 3,
+     "text": "历史可查",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_b3t",
+     "type": "text",
+     "x": 4035800,
+     "y": 5090000,
+     "w": 1270000,
+     "h": 560000,
+     "z": 3,
+     "text": "审计留痕",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_center",
+     "type": "rect",
+     "x": 1800000,
+     "y": 2800000,
+     "w": 2700000,
+     "h": 1500000,
+     "z": 1,
+     "fill": "ink",
+     "line_color": "none",
+     "radius": 0.05
+    },
+    {
+     "id": "lp_ct1",
+     "type": "text",
+     "x": 1800000,
+     "y": 2960000,
+     "w": 2700000,
+     "h": 320000,
+     "z": 3,
+     "text": "7 步闭环",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_ct2",
+     "type": "text",
+     "x": 1800000,
+     "y": 3480000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "产生 → 处置 → 留痕 → 可查",
+     "font": "small",
+     "color": "teal_soft",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_ct3",
+     "type": "text",
+     "x": 1800000,
+     "y": 3800000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "每一步都写库，可回放",
+     "font": "small",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "lp_a1",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       1785800,
+       1780000
+      ],
+      [
+       1885800,
+       1780000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a2",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       2985800,
+       1780000
+      ],
+      [
+       3085800,
+       1780000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a3",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       4185800,
+       1780000
+      ],
+      [
+       4285800,
+       1780000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a4",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       4835800,
+       2060000
+      ],
+      [
+       4835800,
+       5090000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a5",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3955800,
+       5370000
+      ],
+      [
+       3750800,
+       5370000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a6",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       2320800,
+       5370000
+      ],
+      [
+       2115800,
+       5370000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "lp_a7",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       1235800,
+       5090000
+      ],
+      [
+       1235800,
+       2060000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    }
+   ]
+  },
+  {
+   "fig_id": "tables5",
+   "for_slide": "s10_data",
+   "canvas": {
+    "x": 5400000,
+    "y": 1400000,
+    "w": 6106200,
+    "h": 4300000
+   },
+   "_note": "SQLite 五表关系：samples 为核心（深色卡），settings 生效阈值影响 alarms，audit 记录参数变更，device_heartbeat 记录心跳/离线/恢复并同时生成报警。表名与字段名全部取自 db.py 的真实 schema。",
+   "elements": [
+    {
+     "id": "tb_settings",
+     "type": "rect",
+     "x": 5400000,
+     "y": 1400000,
+     "w": 2900000,
+     "h": 1100000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "tb_samples",
+     "type": "rect",
+     "x": 8606200,
+     "y": 1400000,
+     "w": 2900000,
+     "h": 1100000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none",
+     "radius": 0.05
+    },
+    {
+     "id": "tb_audit",
+     "type": "rect",
+     "x": 5400000,
+     "y": 3000000,
+     "w": 2900000,
+     "h": 1100000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "tb_alarms",
+     "type": "rect",
+     "x": 8606200,
+     "y": 3000000,
+     "w": 2900000,
+     "h": 1100000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "tb_hb",
+     "type": "rect",
+     "x": 5400000,
+     "y": 4600000,
+     "w": 6106200,
+     "h": 1100000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.05
+    },
+    {
+     "id": "tb_settings_n",
+     "type": "text",
+     "x": 5500000,
+     "y": 1480000,
+     "w": 2700000,
+     "h": 300000,
+     "z": 3,
+     "text": "settings",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_samples_n",
+     "type": "text",
+     "x": 8706200,
+     "y": 1480000,
+     "w": 2700000,
+     "h": 300000,
+     "z": 3,
+     "text": "samples",
+     "font": "h3",
+     "bold": true,
+     "color": "white",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_audit_n",
+     "type": "text",
+     "x": 5500000,
+     "y": 3080000,
+     "w": 2700000,
+     "h": 300000,
+     "z": 3,
+     "text": "audit",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_alarms_n",
+     "type": "text",
+     "x": 8706200,
+     "y": 3080000,
+     "w": 2700000,
+     "h": 300000,
+     "z": 3,
+     "text": "alarms",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_hb_n",
+     "type": "text",
+     "x": 5500000,
+     "y": 4680000,
+     "w": 5906200,
+     "h": 300000,
+     "z": 3,
+     "text": "device_heartbeat",
+     "font": "h3",
+     "bold": true,
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_settings_r",
+     "type": "text",
+     "x": 5500000,
+     "y": 1800000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "参数设置历史",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_samples_r",
+     "type": "text",
+     "x": 8706200,
+     "y": 1800000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "采样数据 · 五表核心",
+     "font": "small",
+     "color": "teal_soft",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_audit_r",
+     "type": "text",
+     "x": 5500000,
+     "y": 3400000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "审计记录（谁做了什么）",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_alarms_r",
+     "type": "text",
+     "x": 8706200,
+     "y": 3400000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "报警记录（rule + reason）",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_hb_r",
+     "type": "text",
+     "x": 5500000,
+     "y": 5000000,
+     "w": 5906200,
+     "h": 228600,
+     "z": 3,
+     "text": "心跳 / 离线 / 恢复事件（离线同时生成报警）",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_settings_f",
+     "type": "text",
+     "x": 5500000,
+     "y": 2060000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "threshold · interval",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_samples_f",
+     "type": "text",
+     "x": 8706200,
+     "y": 2060000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "ts · device_id · value · seq",
+     "font": "small",
+     "color": "teal_soft",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_audit_f",
+     "type": "text",
+     "x": 5500000,
+     "y": 3660000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "actor · action · detail",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_alarms_f",
+     "type": "text",
+     "x": 8706200,
+     "y": 3660000,
+     "w": 2700000,
+     "h": 228600,
+     "z": 3,
+     "text": "level · rule · reason · status",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_hb_f",
+     "type": "text",
+     "x": 5500000,
+     "y": 5260000,
+     "w": 5906200,
+     "h": 228600,
+     "z": 3,
+     "text": "event = beat / offline / online",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_ln1",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       6300000,
+       2500000
+      ],
+      [
+       6300000,
+       3000000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "tb_ln2",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       7500000,
+       2500000
+      ],
+      [
+       7500000,
+       2750000
+      ],
+      [
+       9500000,
+       2750000
+      ],
+      [
+       9500000,
+       2500000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "tb_ln3",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       10500000,
+       3000000
+      ],
+      [
+       10500000,
+       2500000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "tb_ln4",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8606200,
+       3600000
+      ],
+      [
+       8300000,
+       3600000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "tb_ln5",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       10500000,
+       4100000
+      ],
+      [
+       10500000,
+       4600000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 1.5,
+     "arrow": true
+    },
+    {
+     "id": "tb_l1",
+     "type": "text",
+     "x": 6400000,
+     "y": 2520000,
+     "w": 900000,
+     "h": 228600,
+     "z": 3,
+     "text": "参数变更",
+     "font": "small",
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_l2",
+     "type": "text",
+     "x": 7600000,
+     "y": 2520000,
+     "w": 1000000,
+     "h": 228600,
+     "z": 3,
+     "text": "生效阈值",
+     "font": "small",
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_l3",
+     "type": "text",
+     "x": 10600000,
+     "y": 2600000,
+     "w": 900000,
+     "h": 228600,
+     "z": 3,
+     "text": "越阈报警",
+     "font": "small",
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "tb_l4",
+     "type": "text",
+     "x": 9000000,
+     "y": 4200000,
+     "w": 1400000,
+     "h": 228600,
+     "z": 3,
+     "text": "心跳/离线事件",
+     "font": "small",
+     "color": "navy",
+     "align": "left",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "security_8",
+   "for_slide": "s11_security",
+   "canvas": {
+    "x": 685800,
+    "y": 1350000,
+    "w": 10820400,
+    "h": 3200000
+   },
+   "_note": "左半 4 道防线卡（密钥环境变量化 / 统一鉴权 / 未登录 API 401 / CSRF + 密码哈希），右半 4 张工程化指标卡（101 项测试、11 个测试文件、three.js 与 ECharts 本地化断网可跑、6 个 Python 模块约 1500 行）。",
+   "elements": [
+    {
+     "id": "se_d1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1430000,
+     "w": 6400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_d2",
+     "type": "rect",
+     "x": 685800,
+     "y": 2210000,
+     "w": 6400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_d3",
+     "type": "rect",
+     "x": 685800,
+     "y": 2990000,
+     "w": 6400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_d4",
+     "type": "rect",
+     "x": 685800,
+     "y": 3770000,
+     "w": 6400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_m1",
+     "type": "rect",
+     "x": 7400000,
+     "y": 1430000,
+     "w": 4106200,
+     "h": 700000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_m2",
+     "type": "rect",
+     "x": 7400000,
+     "y": 2210000,
+     "w": 4106200,
+     "h": 700000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_m3",
+     "type": "rect",
+     "x": 7400000,
+     "y": 2990000,
+     "w": 4106200,
+     "h": 700000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_m4",
+     "type": "rect",
+     "x": 7400000,
+     "y": 3770000,
+     "w": 4106200,
+     "h": 700000,
+     "z": 1,
+     "fill": "white",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "se_d1n",
+     "type": "text",
+     "x": 838200,
+     "y": 1620000,
+     "w": 2400000,
+     "h": 320000,
+     "z": 3,
+     "text": "密钥环境变量化",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d2n",
+     "type": "text",
+     "x": 838200,
+     "y": 2400000,
+     "w": 2400000,
+     "h": 320000,
+     "z": 3,
+     "text": "统一鉴权",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d3n",
+     "type": "text",
+     "x": 838200,
+     "y": 3180000,
+     "w": 2400000,
+     "h": 320000,
+     "z": 3,
+     "text": "未登录 API → 401",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d4n",
+     "type": "text",
+     "x": 838200,
+     "y": 3960000,
+     "w": 2400000,
+     "h": 320000,
+     "z": 3,
+     "text": "CSRF 防护 + 口令哈希",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d1r",
+     "type": "text",
+     "x": 3400000,
+     "y": 1660000,
+     "w": 3500000,
+     "h": 240000,
+     "z": 3,
+     "text": "敏感配置走 .env，不进代码仓库",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d2r",
+     "type": "text",
+     "x": 3400000,
+     "y": 2440000,
+     "w": 3500000,
+     "h": 240000,
+     "z": 3,
+     "text": "所有写操作与后台页面统一校验会话",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d3r",
+     "type": "text",
+     "x": 3400000,
+     "y": 3220000,
+     "w": 3500000,
+     "h": 240000,
+     "z": 3,
+     "text": "接口不返回业务数据，只返回 401",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_d4r",
+     "type": "text",
+     "x": 3400000,
+     "y": 4000000,
+     "w": 3500000,
+     "h": 240000,
+     "z": 3,
+     "text": "表单带令牌；口令支持哈希校验存储",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m1v",
+     "type": "text",
+     "x": 7520000,
+     "y": 1530000,
+     "w": 1200000,
+     "h": 500000,
+     "z": 3,
+     "text": "101",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m2v",
+     "type": "text",
+     "x": 7520000,
+     "y": 2310000,
+     "w": 1200000,
+     "h": 500000,
+     "z": 3,
+     "text": "11",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m3v",
+     "type": "text",
+     "x": 7520000,
+     "y": 3090000,
+     "w": 1200000,
+     "h": 500000,
+     "z": 3,
+     "text": "断网",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m4v",
+     "type": "text",
+     "x": 7520000,
+     "y": 3870000,
+     "w": 1200000,
+     "h": 500000,
+     "z": 3,
+     "text": "6",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "navy",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m1r",
+     "type": "text",
+     "x": 8800000,
+     "y": 1550000,
+     "w": 2606200,
+     "h": 457200,
+     "z": 3,
+     "text": "项测试用例 · 11 个测试文件",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m2r",
+     "type": "text",
+     "x": 8800000,
+     "y": 2330000,
+     "w": 2606200,
+     "h": 457200,
+     "z": 3,
+     "text": "个测试文件（含 conftest）",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m3r",
+     "type": "text",
+     "x": 8800000,
+     "y": 3110000,
+     "w": 2606200,
+     "h": 457200,
+     "z": 3,
+     "text": "three.js / ECharts 已本地化",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "se_m4r",
+     "type": "text",
+     "x": 8800000,
+     "y": 3890000,
+     "w": 2606200,
+     "h": 457200,
+     "z": 3,
+     "text": "个 Python 模块 · 约 1500 行",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "tests_dist",
+   "for_slide": "s12_evidence",
+   "canvas": {
+    "x": 5800000,
+    "y": 1400000,
+    "w": 5706200,
+    "h": 4200000
+   },
+   "_note": "按测试域分组展示：不列分项用例数，只报可稳定复现的计数（101 项用例、11 个测试文件 = 10 个 test_*.py + conftest.py）。不写 passed/耗时/0 failed 这类单次快照断言（套件含一个 headless 浏览器用例，存在间歇性 flake）。",
+   "elements": [
+    {
+     "id": "td_kpi",
+     "type": "rect",
+     "x": 5800000,
+     "y": 1400000,
+     "w": 5706200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none",
+     "radius": 0.04
+    },
+    {
+     "id": "td_kpi_v",
+     "type": "text",
+     "x": 5920000,
+     "y": 1460000,
+     "w": 5466200,
+     "h": 660000,
+     "z": 3,
+     "text": "101 项用例",
+     "font": "kpi",
+     "bold": true,
+     "color": "white",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_kpi_s",
+     "type": "text",
+     "x": 5920000,
+     "y": 2130000,
+     "w": 5466200,
+     "h": 228600,
+     "z": 3,
+     "text": "101 项用例 · 11 个测试文件（10 个 test_*.py + conftest.py）",
+     "font": "small",
+     "color": "teal_soft",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_kpi_n",
+     "type": "text",
+     "x": 5920000,
+     "y": 2380000,
+     "w": 5466200,
+     "h": 228600,
+     "z": 3,
+     "text": "按测试域分组展示：不列分项用例数，只报已核实总数",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g1",
+     "type": "rect",
+     "x": 5800000,
+     "y": 2900000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g2",
+     "type": "rect",
+     "x": 7753100,
+     "y": 2900000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g3",
+     "type": "rect",
+     "x": 9706200,
+     "y": 2900000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g4",
+     "type": "rect",
+     "x": 5800000,
+     "y": 3700000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g5",
+     "type": "rect",
+     "x": 7753100,
+     "y": 3700000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g6",
+     "type": "rect",
+     "x": 9706200,
+     "y": 3700000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g7",
+     "type": "rect",
+     "x": 5800000,
+     "y": 4500000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g8",
+     "type": "rect",
+     "x": 7753100,
+     "y": 4500000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g9",
+     "type": "rect",
+     "x": 9706200,
+     "y": 4500000,
+     "w": 1800000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.06
+    },
+    {
+     "id": "td_g1n",
+     "type": "text",
+     "x": 5900000,
+     "y": 2960000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "数据层",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g2n",
+     "type": "text",
+     "x": 7853100,
+     "y": 2960000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "鉴权与 CSRF",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g3n",
+     "type": "text",
+     "x": 9806200,
+     "y": 2960000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "规则引擎",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g4n",
+     "type": "text",
+     "x": 5900000,
+     "y": 3760000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "设备与串口",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g5n",
+     "type": "text",
+     "x": 7853100,
+     "y": 3760000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "接口",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g6n",
+     "type": "text",
+     "x": 9806200,
+     "y": 3760000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "页面渲染",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g7n",
+     "type": "text",
+     "x": 5900000,
+     "y": 4560000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "移动端",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g8n",
+     "type": "text",
+     "x": 7853100,
+     "y": 4560000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "测试夹具",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g9n",
+     "type": "text",
+     "x": 9806200,
+     "y": 4560000,
+     "w": 1600000,
+     "h": 300000,
+     "z": 3,
+     "text": "全量回归",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g1r",
+     "type": "text",
+     "x": 5900000,
+     "y": 3270000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "五表读写与索引",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g2r",
+     "type": "text",
+     "x": 7853100,
+     "y": 3270000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "登录态与令牌校验",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g3r",
+     "type": "text",
+     "x": 9806200,
+     "y": 3270000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "6 类规则与滞回",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g4r",
+     "type": "text",
+     "x": 5900000,
+     "y": 4070000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "心跳、超时与离线",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g5r",
+     "type": "text",
+     "x": 7853100,
+     "y": 4070000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "路由返回与状态码",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g6r",
+     "type": "text",
+     "x": 9806200,
+     "y": 4070000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "模板与静态资源可用",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g7r",
+     "type": "text",
+     "x": 5900000,
+     "y": 4870000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "≤768px 走趋势页",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g8r",
+     "type": "text",
+     "x": 7853100,
+     "y": 4870000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "conftest.py 与夹具",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "td_g9r",
+     "type": "text",
+     "x": 9806200,
+     "y": 4870000,
+     "w": 1600000,
+     "h": 228600,
+     "z": 3,
+     "text": "pytest tests/ -q",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    }
+   ]
+  },
+  {
+   "fig_id": "boundary_grid",
+   "for_slide": "s13_boundary",
+   "canvas": {
+    "x": 685800,
+    "y": 1350000,
+    "w": 10820400,
+    "h": 3250000
+   },
+   "_note": "左「当前边界（如实说明）」5 条 ↔ 右「下一步扩展方向」4 条，中间一枚指向箭头。边界条目全部来自 BUILD_SPEC §7 的诚实口径（单设备、无量纲、1 s 周期 60 点、未做长期稳定性与工程级标定）。",
+   "elements": [
+    {
+     "id": "bg_l",
+     "type": "rect",
+     "x": 685800,
+     "y": 1350000,
+     "w": 5200000,
+     "h": 3250000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.03
+    },
+    {
+     "id": "bg_r",
+     "type": "rect",
+     "x": 6200000,
+     "y": 1350000,
+     "w": 5306200,
+     "h": 3250000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.03
+    },
+    {
+     "id": "bg_hl",
+     "type": "text",
+     "x": 835800,
+     "y": 1450000,
+     "w": 4900000,
+     "h": 320000,
+     "z": 3,
+     "text": "当前边界（如实说明）",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_hr",
+     "type": "text",
+     "x": 6350000,
+     "y": 1450000,
+     "w": 5006200,
+     "h": 320000,
+     "z": 3,
+     "text": "下一步扩展方向",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_l1",
+     "type": "text",
+     "x": 835800,
+     "y": 1950000,
+     "w": 4900000,
+     "h": 228600,
+     "z": 3,
+     "text": "单设备原型：只有一个测点通道",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_l2",
+     "type": "text",
+     "x": 835800,
+     "y": 2430000,
+     "w": 4900000,
+     "h": 228600,
+     "z": 3,
+     "text": "相对应变指标：无量纲，不做物理换算",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_l3",
+     "type": "text",
+     "x": 835800,
+     "y": 2910000,
+     "w": 4900000,
+     "h": 228600,
+     "z": 3,
+     "text": "1 秒采样周期，曲线保留最近 60 点",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_l4",
+     "type": "text",
+     "x": 835800,
+     "y": 3390000,
+     "w": 4900000,
+     "h": 228600,
+     "z": 3,
+     "text": "未做长期稳定性验证",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_l5",
+     "type": "text",
+     "x": 835800,
+     "y": 3870000,
+     "w": 4900000,
+     "h": 228600,
+     "z": 3,
+     "text": "未做工程级标定与量值溯源",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_r1",
+     "type": "text",
+     "x": 6350000,
+     "y": 1950000,
+     "w": 5006200,
+     "h": 228600,
+     "z": 3,
+     "text": "多测点：增加测点通道与布点",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_r2",
+     "type": "text",
+     "x": 6350000,
+     "y": 2430000,
+     "w": 5006200,
+     "h": 228600,
+     "z": 3,
+     "text": "HTTP 备份通道：串口之外的第二条路",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_r3",
+     "type": "text",
+     "x": 6350000,
+     "y": 2910000,
+     "w": 5006200,
+     "h": 228600,
+     "z": 3,
+     "text": "长期测试：连续运行与稳定性观察",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_r4",
+     "type": "text",
+     "x": 6350000,
+     "y": 3390000,
+     "w": 5006200,
+     "h": 228600,
+     "z": 3,
+     "text": "更细标定：标定流程与版本管理",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "middle"
+    },
+    {
+     "id": "bg_arrow",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       5900000,
+       2900000
+      ],
+      [
+       6150000,
+       2900000
+      ]
+     ],
+     "line_color": "navy",
+     "line_width": 2,
+     "arrow": true
+    }
+   ]
+  },
+  {
+   "fig_id": "value_tri",
+   "for_slide": "s14_value",
+   "canvas": {
+    "x": 1188720,
+    "y": 1188720,
+    "w": 9826560,
+    "h": 4846320
+   },
+   "_note": "价值三角：三个角点节点 + 三角边界，中心完全留空给 task-1 的结论金句（金句文字框 y 2650000~3820000）。三角边线在中心带断开（上段止于 y=2600000，下段起于 y=4000000），既读得出三角形，又不与任何中心文字相交。",
+   "elements": [
+    {
+     "id": "vt_top",
+     "type": "rect",
+     "x": 4902000,
+     "y": 1188720,
+     "w": 2400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "teal_soft",
+     "line_color": "teal",
+     "line_width": 1.5,
+     "radius": 0.08
+    },
+    {
+     "id": "vt_bl",
+     "type": "rect",
+     "x": 1188720,
+     "y": 5335040,
+     "w": 2400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1.5,
+     "radius": 0.08
+    },
+    {
+     "id": "vt_br",
+     "type": "rect",
+     "x": 8615280,
+     "y": 5335040,
+     "w": 2400000,
+     "h": 700000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1.5,
+     "radius": 0.08
+    },
+    {
+     "id": "vt_top_n",
+     "type": "text",
+     "x": 5002000,
+     "y": 1248720,
+     "w": 2200000,
+     "h": 304800,
+     "z": 3,
+     "text": "可解释",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_top_s",
+     "type": "text",
+     "x": 5002000,
+     "y": 1588720,
+     "w": 2200000,
+     "h": 228600,
+     "z": 3,
+     "text": "每条报警都有 rule + reason",
+     "font": "small",
+     "color": "slate",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_bl_n",
+     "type": "text",
+     "x": 1288720,
+     "y": 5395040,
+     "w": 2200000,
+     "h": 304800,
+     "z": 3,
+     "text": "可追溯",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_bl_s",
+     "type": "text",
+     "x": 1288720,
+     "y": 5735040,
+     "w": 2200000,
+     "h": 228600,
+     "z": 3,
+     "text": "五表 + 审计留痕，历史可查",
+     "font": "small",
+     "color": "slate",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_br_n",
+     "type": "text",
+     "x": 8715280,
+     "y": 5395040,
+     "w": 2200000,
+     "h": 304800,
+     "z": 3,
+     "text": "不造假",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_br_s",
+     "type": "text",
+     "x": 8715280,
+     "y": 5735040,
+     "w": 2200000,
+     "h": 228600,
+     "z": 3,
+     "text": "断线如实离线 · 模拟数据明示",
+     "font": "small",
+     "color": "slate",
+     "align": "center",
+     "valign": "middle"
+    },
+    {
+     "id": "vt_e1",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       5788550,
+       1888720
+      ],
+      [
+       5151557,
+       2600000
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1.5
+    },
+    {
+     "id": "vt_e2",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3897711,
+       4000000
+      ],
+      [
+       2702223,
+       5335040
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1.5
+    },
+    {
+     "id": "vt_e3",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       6415450,
+       1888720
+      ],
+      [
+       7052443,
+       2600000
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1.5
+    },
+    {
+     "id": "vt_e4",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       8306289,
+       4000000
+      ],
+      [
+       9501777,
+       5335040
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1.5
+    },
+    {
+     "id": "vt_e5",
+     "type": "line",
+     "z": 2,
+     "points": [
+      [
+       3588720,
+       5685040
+      ],
+      [
+       8615280,
+       5685040
+      ]
+     ],
+     "line_color": "slate_light",
+     "line_width": 1.5
+    }
+   ]
+  },
+  {
+   "fig_id": "thanks_geo",
+   "for_slide": "s15_thanks",
+   "canvas": {
+    "x": 0,
+    "y": 0,
+    "w": 12192000,
+    "h": 6858000
+   },
+   "_note": "致谢几何底图（chrome=none，可铺满整页）：底部通栏深色带 + 右上块状细网格 + 左侧强调条，中部留白给致谢文字（由构建脚本渲染）。",
+   "elements": [
+    {
+     "id": "tk_bar_teal",
+     "type": "rect",
+     "x": 685800,
+     "y": 762000,
+     "w": 914400,
+     "h": 228600,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_bar_navy",
+     "type": "rect",
+     "x": 685800,
+     "y": 1110600,
+     "w": 457200,
+     "h": 228600,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_spine",
+     "type": "rect",
+     "x": 685800,
+     "y": 2286000,
+     "w": 152400,
+     "h": 1828800,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m00",
+     "type": "rect",
+     "x": 8780000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m01",
+     "type": "rect",
+     "x": 9200000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m02",
+     "type": "rect",
+     "x": 9620000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m03",
+     "type": "rect",
+     "x": 10040000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m04",
+     "type": "rect",
+     "x": 10460000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m05",
+     "type": "rect",
+     "x": 10880000,
+     "y": 762000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m10",
+     "type": "rect",
+     "x": 8780000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m11",
+     "type": "rect",
+     "x": 9200000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m12",
+     "type": "rect",
+     "x": 9620000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m13",
+     "type": "rect",
+     "x": 10040000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "teal",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m14",
+     "type": "rect",
+     "x": 10460000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "navy",
+     "line_color": "none"
+    },
+    {
+     "id": "tk_m15",
+     "type": "rect",
+     "x": 10880000,
+     "y": 1182000,
+     "w": 300000,
+     "h": 300000,
+     "z": 1,
+     "fill": "blue",
+     "line_color": "none"
+    }
+   ]
+  }
+ ]
+}

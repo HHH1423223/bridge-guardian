@@ -1,0 +1,1593 @@
+{
+ "deck": {
+  "title": "桥体卫士 · 桥梁结构健康监测缩尺原型",
+  "slides_total": 15,
+  "duration_seconds": 720,
+  "speaker": "单人主讲",
+  "hardware_on_stage": false
+ },
+ "slides": [
+  {
+   "slide_id": "s01_cover",
+   "chrome": "none",
+   "section": null,
+   "title": "桥体卫士",
+   "lead": "桥梁结构健康监测缩尺原型",
+   "seconds": 30,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 1188720,
+     "y": 4180000,
+     "w": 8600000,
+     "h": 330000,
+     "z": 2,
+     "text": "采集 · 判断 · 存储 · 展示 · 处置 —— 一条完整链路",
+     "font": "h3",
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 1188720,
+     "y": 4580000,
+     "w": 8600000,
+     "h": 300000,
+     "z": 2,
+     "text": "软件技术专业 · 缩尺桥梁模型受载变化模拟 · 单人主讲",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 1188720,
+     "y": 4940000,
+     "w": 8600000,
+     "h": 250000,
+     "z": 2,
+     "text": "现场只跑软件：模拟数据源 + 浏览器三维可视化监测场景",
+     "font": "small",
+     "color": "slate_light",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "cover_geo",
+     "area": {
+      "x": 0,
+      "y": 0,
+      "w": 12192000,
+      "h": 6858000
+     }
+    }
+   ],
+   "notes": "各位评委好，我是「桥体卫士」的答辩人。这是一套桥梁结构健康监测的缩尺原型系统：从采集、判断、存储到展示与处置，五个环节跑成一条完整闭环。这套系统是怎么做的、能证明什么，我用十二分钟讲清楚。"
+  },
+  {
+   "slide_id": "s02_pain",
+   "chrome": "standard",
+   "section": "项目定位",
+   "title": "为什么做这件事 —— 桥梁受载监测的痛点",
+   "lead": "专业监测设备贵、部署难；缩尺原型可以把完整链路跑通。",
+   "seconds": 50,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 6900000,
+     "y": 1400000,
+     "w": 4606200,
+     "h": 1950000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 7050000,
+     "y": 1520000,
+     "w": 4306200,
+     "h": 330000,
+     "z": 2,
+     "text": "定位：完整链路原型",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 7050000,
+     "y": 1930000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "缩尺桥梁模型的受载变化模拟，",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 7050000,
+     "y": 2280000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "把采集、判断、存储、展示、处置跑通。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 6900000,
+     "y": 3700000,
+     "w": 4606200,
+     "h": 1950000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 7050000,
+     "y": 3820000,
+     "w": 4306200,
+     "h": 330000,
+     "z": 2,
+     "text": "边界：不夸大，不越线",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 7050000,
+     "y": 4230000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "输出相对应变指标，无量纲，",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 7050000,
+     "y": 4580000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "不做精度承诺，只做可验证的链路。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "pain_compare",
+     "area": {
+      "x": 685800,
+      "y": 1400000,
+      "w": 5700000,
+      "h": 4200000
+     }
+    }
+   ],
+   "notes": "桥梁长期受载，结构健康关乎安全。但专业监测设备贵、部署难，还依赖标定。这套系统换了一个思路：用缩尺桥梁模型做受载变化模拟，把采集、判断、存储、展示、处置这条链路完整跑通。这里先说明边界：它是缩尺原型，输出的是相对应变指标，无量纲，不做精度承诺。"
+  },
+  {
+   "slide_id": "s03_arch",
+   "chrome": "standard",
+   "section": "系统架构",
+   "title": "六层架构 —— 数据源可插拔",
+   "lead": "同一套报警、存储与展示逻辑，换数据源不改上层。",
+   "seconds": 50,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1400000,
+     "w": 5000000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 785800,
+     "y": 1500000,
+     "w": 4700000,
+     "h": 330000,
+     "z": 2,
+     "text": "核心：数据源抽象",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 785800,
+     "y": 1880000,
+     "w": 4700000,
+     "h": 300000,
+     "z": 2,
+     "text": "模拟器与串口实现同一个接口。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 785800,
+     "y": 2210000,
+     "w": 4700000,
+     "h": 300000,
+     "z": 2,
+     "text": "DATA_SOURCE 一键切换。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 685800,
+     "y": 2900000,
+     "w": 5000000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 785800,
+     "y": 3000000,
+     "w": 4700000,
+     "h": 330000,
+     "z": 2,
+     "text": "上层只依赖接口",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 785800,
+     "y": 3380000,
+     "w": 4700000,
+     "h": 300000,
+     "z": 2,
+     "text": "换数据源不动报警、存储与展示逻辑。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 685800,
+     "y": 4400000,
+     "w": 5000000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 785800,
+     "y": 4500000,
+     "w": 4700000,
+     "h": 330000,
+     "z": 2,
+     "text": "工程规模",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e7",
+     "type": "text",
+     "x": 785800,
+     "y": 4880000,
+     "w": 4700000,
+     "h": 300000,
+     "z": 2,
+     "text": "19 条后端路由 · 6 个 Python 模块",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "arch6",
+     "area": {
+      "x": 6100000,
+      "y": 1400000,
+      "w": 5406200,
+      "h": 4300000
+     }
+    }
+   ],
+   "notes": "整个系统分六层：硬件层、采集层、规则引擎、数据层、服务层、展示层。最核心的设计在采集层——一个数据源抽象：模拟器和真实串口实现同一个接口，用环境变量一键切换。这意味着同样的报警判断、同样的存储、同样的界面，换数据源不用改上层代码。后端一共 19 条路由，核心 Python 模块 6 个。"
+  },
+  {
+   "slide_id": "s04_source",
+   "chrome": "standard",
+   "section": "工程兜底",
+   "title": "数据源与设备策略 —— 断线如实离线",
+   "lead": "可识别、可切换、不伪造。",
+   "seconds": 45,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 6900000,
+     "y": 1400000,
+     "w": 4606200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 7050000,
+     "y": 1500000,
+     "w": 4306200,
+     "h": 330000,
+     "z": 2,
+     "text": "健康度三要素",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 7050000,
+     "y": 1880000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "心跳时间戳 / 连续超时计数 / 最近错误原因",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 6900000,
+     "y": 2900000,
+     "w": 4606200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 7050000,
+     "y": 3000000,
+     "w": 4306200,
+     "h": 330000,
+     "z": 2,
+     "text": "断线就报离线",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 7050000,
+     "y": 3380000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "不沿用旧值，不伪造在线状态。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 6900000,
+     "y": 4400000,
+     "w": 4606200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 7050000,
+     "y": 4500000,
+     "w": 4306200,
+     "h": 330000,
+     "z": 2,
+     "text": "本次演示",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 7050000,
+     "y": 4880000,
+     "w": 4306200,
+     "h": 300000,
+     "z": 2,
+     "text": "真实硬件链路已实现，本次按软件模式演示。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "source_switch",
+     "area": {
+      "x": 685800,
+      "y": 1400000,
+      "w": 5700000,
+      "h": 4300000
+     }
+    }
+   ],
+   "notes": "数据源有两种：模拟和真实串口，用 DATA_SOURCE 一键切换。现场最怕不确定，所以设备健康度由三样东西构成：心跳时间戳、连续超时计数、最近错误原因。拔掉设备，大屏立刻如实显示「设备离线」，并触发一条设备离线报警——不沿用旧值制造在线假象。真实硬件链路已实现，本次按软件模式演示。"
+  },
+  {
+   "slide_id": "s05_scene",
+   "chrome": "standard",
+   "section": "核心亮点",
+   "title": "三维监测场景 —— 一屏统管",
+   "lead": "中央是桥梁结构，四周是风险事实。",
+   "seconds": 60,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 7600000,
+     "y": 1300000,
+     "w": 3906200,
+     "h": 1150000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 7750000,
+     "y": 1420000,
+     "w": 3606200,
+     "h": 440000,
+     "z": 2,
+     "text": "主跨 1420m",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 7750000,
+     "y": 1920000,
+     "w": 3606200,
+     "h": 250000,
+     "z": 2,
+     "text": "双塔单跨钢桁梁悬索桥",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 7600000,
+     "y": 2600000,
+     "w": 3906200,
+     "h": 1150000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 7750000,
+     "y": 2720000,
+     "w": 3606200,
+     "h": 440000,
+     "z": 2,
+     "text": "5 个预设视角",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 7750000,
+     "y": 3220000,
+     "w": 3606200,
+     "h": 250000,
+     "z": 2,
+     "text": "旋转 / 缩放 / 平移 / 双击聚焦",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 7600000,
+     "y": 3900000,
+     "w": 3906200,
+     "h": 1150000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 7750000,
+     "y": 4020000,
+     "w": 3606200,
+     "h": 440000,
+     "z": 2,
+     "text": "断网可用",
+     "font": "kpi_sm",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 7750000,
+     "y": 4520000,
+     "w": 3606200,
+     "h": 250000,
+     "z": 2,
+     "text": "three.js r160 本地化，WebGL 不可用降级二维",
+     "font": "small",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e7",
+     "type": "text",
+     "x": 685800,
+     "y": 5100000,
+     "w": 6300000,
+     "h": 300000,
+     "z": 2,
+     "text": "花江峡谷大桥按公开设计参数程序化建模；",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e8",
+     "type": "text",
+     "x": 685800,
+     "y": 5450000,
+     "w": 6300000,
+     "h": 300000,
+     "z": 2,
+     "text": "杆件与缆索按公开参数生成，点选测点看说明。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "twin_wire",
+     "area": {
+      "x": 685800,
+      "y": 1188720,
+      "w": 6708648,
+      "h": 3780129
+     }
+    }
+   ],
+   "notes": "这是核心亮点。大屏中央是「桥梁结构三维可视化监测场景」——按花江峡谷大桥的公开设计参数程序化建模：主跨 1420 米、双塔单跨钢桁梁悬索桥；杆件与缆索按公开参数生成，它是几何示意，不是实测模型。场景可以旋转、缩放、平移，双击任意位置就能聚焦过去，一共五个预设视角，结构线框可以开关，点选测点就能看到部位说明。风险等级一变，全场颜色和测点波纹节奏跟着变。依赖全部本地化，断网照样跑；WebGL 不可用时会如实降级成二维示意图。"
+  },
+  {
+   "slide_id": "s06_video",
+   "chrome": "standard",
+   "section": "现场演示",
+   "title": "软件全链路演示（1 分钟）",
+   "lead": null,
+   "seconds": 60,
+   "elements": [],
+   "layout_map": [
+    {
+     "fig_id": "video_slots",
+     "area": {
+      "x": 1188720,
+      "y": 1330000,
+      "w": 7528560,
+      "h": 4658600
+     }
+    }
+   ],
+   "notes": "见 _spec/SPEC_s06_video.md。开场：「这一分钟是系统的完整操作录屏——用模拟数据源跑通全链路，因为本次不使用硬件。」收尾：「视频里最后一步是拔掉设备、系统如实显示离线——这是我最想强调的一点：不造假。」"
+  },
+  {
+   "slide_id": "s07_risk",
+   "chrome": "standard",
+   "section": "核心亮点",
+   "title": "风险联动 —— 颜色就是结论",
+   "lead": "分级口径写进代码，三处视图同步联动。",
+   "seconds": 45,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1400000,
+     "w": 4300000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 785800,
+     "y": 1500000,
+     "w": 4000000,
+     "h": 330000,
+     "z": 2,
+     "text": "四级颜色语言",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 785800,
+     "y": 1880000,
+     "w": 4000000,
+     "h": 300000,
+     "z": 2,
+     "text": "大屏、仪表、报警行同一套颜色语言。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 685800,
+     "y": 2900000,
+     "w": 4300000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 785800,
+     "y": 3000000,
+     "w": 4000000,
+     "h": 330000,
+     "z": 2,
+     "text": "分级口径",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 785800,
+     "y": 3380000,
+     "w": 4000000,
+     "h": 300000,
+     "z": 2,
+     "text": "超过阈值 1.2 倍判严重报警，",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 785800,
+     "y": 3710000,
+     "w": 4000000,
+     "h": 300000,
+     "z": 2,
+     "text": "1.1 倍判报警，其余预警。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 685800,
+     "y": 4400000,
+     "w": 4300000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 785800,
+     "y": 4500000,
+     "w": 4000000,
+     "h": 330000,
+     "z": 2,
+     "text": "一次有效提醒",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e7",
+     "type": "text",
+     "x": 785800,
+     "y": 4880000,
+     "w": 4000000,
+     "h": 300000,
+     "z": 2,
+     "text": "边沿触发 + 滞回，不刷屏。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "risk_link",
+     "area": {
+      "x": 5300000,
+      "y": 1400000,
+      "w": 6206200,
+      "h": 4300000
+     }
+    }
+   ],
+   "notes": "风险分四级：正常、预警、报警、严重报警，对应绿、黄、橙、红。分级口径是：超过阈值 1.2 倍判严重报警，1.1 倍判报警，其余是预警。颜色不是装饰——大屏风险卡、阈值仪表、报警行共用同一套颜色语言，一眼就能看出现在处于哪一级。规则用边沿触发加滞回，进入超限只提醒一次，不会刷屏。"
+  },
+  {
+   "slide_id": "s08_rules",
+   "chrome": "standard",
+   "section": "技术核心",
+   "title": "6 类可解释规则 —— 每条报警说清为什么",
+   "lead": "报警不只是一个红点，而是一条事实。",
+   "seconds": 55,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 685800,
+     "y": 4820000,
+     "w": 10820400,
+     "h": 330000,
+     "z": 2,
+     "text": "每条报警 = 触发规则 + 触发值 + 原因",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 685800,
+     "y": 5200000,
+     "w": 10820400,
+     "h": 350000,
+     "z": 2,
+     "text": "边沿触发 + 滞回：持续超限只报一次，回落后才能再报；参数集中在 rules.py。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "rules_matrix",
+     "area": {
+      "x": 685800,
+      "y": 1350000,
+      "w": 10820400,
+      "h": 3350000
+     }
+    }
+   ],
+   "notes": "报警引擎一共六类规则：阈值超限、变化率突变、持续超限、短时波动、基线偏移，加上设备离线。关键在可解释：每条报警都带着触发规则、触发值和原因。比如原因会写成「应变指标 135.00 超过阈值 120.00，相对应变指标，无量纲」——评委看到的是一个事实，不是一个红点。规则默认参数是：阈值 120、变化率 10、持续 5 个点、基线窗口 30、漂移 20。防刷屏靠边沿触发加滞回：进入超限的瞬间只报一次，回到安全区才允许再报。"
+  },
+  {
+   "slide_id": "s09_loop",
+   "chrome": "standard",
+   "section": "业务闭环",
+   "title": "报警处置闭环 —— 每条告警都有交代",
+   "lead": "从发现到复盘，动作和数据同屏闭环。",
+   "seconds": 50,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 5750000,
+     "y": 1450000,
+     "w": 5756200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 5900000,
+     "y": 1550000,
+     "w": 5456200,
+     "h": 330000,
+     "z": 2,
+     "text": "有人认领，有状态",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 5900000,
+     "y": 1930000,
+     "w": 5456200,
+     "h": 300000,
+     "z": 2,
+     "text": "确认处理后，状态从「未处理」转为「已处理」。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 5750000,
+     "y": 2900000,
+     "w": 5756200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 5900000,
+     "y": 3000000,
+     "w": 5456200,
+     "h": 330000,
+     "z": 2,
+     "text": "连设备异常也入环",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 5900000,
+     "y": 3380000,
+     "w": 5456200,
+     "h": 300000,
+     "z": 2,
+     "text": "离线触发严重报警，恢复自动记录设备恢复。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 5750000,
+     "y": 4350000,
+     "w": 5756200,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 5900000,
+     "y": 4450000,
+     "w": 5456200,
+     "h": 330000,
+     "z": 2,
+     "text": "参数变更留痕",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 5900000,
+     "y": 4830000,
+     "w": 5456200,
+     "h": 300000,
+     "z": 2,
+     "text": "谁在何时改了什么，审计表一查便知。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "loop_ring",
+     "area": {
+      "x": 685800,
+      "y": 1450000,
+      "w": 4700000,
+      "h": 4200000
+     }
+    }
+   ],
+   "notes": "报警不是终点。待处置计数在报警出现时变红，值班人员点「确认处理」，状态从「未处理」变为「已处理」，处置留痕。设备离线会触发一条严重报警，恢复在线时系统自动记录「设备恢复」——连设备自身的异常也纳入同一个闭环。另外，谁在何时改了阈值或采样周期，都写进审计表，设置页能看到最近变更记录。"
+  },
+  {
+   "slide_id": "s10_data",
+   "chrome": "standard",
+   "section": "数据可靠",
+   "title": "数据可靠与全程可追溯",
+   "lead": "五张表，一套时间与设备口径。",
+   "seconds": 45,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1400000,
+     "w": 4400000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 785800,
+     "y": 1500000,
+     "w": 4100000,
+     "h": 330000,
+     "z": 2,
+     "text": "统一字段口径",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 785800,
+     "y": 1880000,
+     "w": 4100000,
+     "h": 300000,
+     "z": 2,
+     "text": "时间 / 设备号 / 来源 / 状态 / 审计",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 685800,
+     "y": 2900000,
+     "w": 4400000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 785800,
+     "y": 3000000,
+     "w": 4100000,
+     "h": 330000,
+     "z": 2,
+     "text": "3 个时间索引",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 785800,
+     "y": 3380000,
+     "w": 4100000,
+     "h": 300000,
+     "z": 2,
+     "text": "历史查询按时间走索引，不全表加载。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 685800,
+     "y": 4400000,
+     "w": 4400000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 785800,
+     "y": 4500000,
+     "w": 4100000,
+     "h": 330000,
+     "z": 2,
+     "text": "可导出",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 785800,
+     "y": 4880000,
+     "w": 4100000,
+     "h": 300000,
+     "z": 2,
+     "text": "时间筛选、统计摘要与 CSV 导出。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "tables5",
+     "area": {
+      "x": 5400000,
+      "y": 1400000,
+      "w": 6106200,
+      "h": 4300000
+     }
+    }
+   ],
+   "notes": "数据统一存在 SQLite 里，一共五张表：samples 采样、alarms 报警、settings 参数、audit 审计、device_heartbeat 设备心跳。时间、设备号、来源、状态这些字段口径统一，主要表都建了时间索引，历史查询不会全表加载。每次参数变更都会写审计，历史数据支持时间筛选、统计摘要和 CSV 导出。"
+  },
+  {
+   "slide_id": "s11_security",
+   "chrome": "standard",
+   "section": "工程质量",
+   "title": "安全与工程化 —— 能交付的程度",
+   "lead": "用户看不见的地方，也没有省。",
+   "seconds": 40,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 685800,
+     "y": 4680000,
+     "w": 10820400,
+     "h": 330000,
+     "z": 2,
+     "text": "实跑：101 项用例 · 覆盖规则、数据、鉴权、串口与页面壳",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 685800,
+     "y": 5060000,
+     "w": 10820400,
+     "h": 350000,
+     "z": 2,
+     "text": "11 个测试文件覆盖规则、数据、鉴权、CSRF、串口、设备与页面壳。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "security_8",
+     "area": {
+      "x": 685800,
+      "y": 1350000,
+      "w": 10820400,
+      "h": 3200000
+     }
+    }
+   ],
+   "notes": "安全上，密钥走环境变量、不硬编码；所有页面和接口统一鉴权，未登录访问 API 返回 401；写接口都做 CSRF 防护；口令支持哈希校验，可用环境变量切换。工程化上，测试套件一共 101 个用例、11 个测试文件，覆盖规则引擎、数据层、鉴权、CSRF、串口链路与设备心跳。"
+  },
+  {
+   "slide_id": "s12_evidence",
+   "chrome": "standard",
+   "section": "验证证据",
+   "title": "可度量成果 —— 测试覆盖",
+   "lead": "每个结论都能现场复核。",
+   "seconds": 50,
+   "elements": [
+    {
+     "id": "r1",
+     "type": "rect",
+     "x": 685800,
+     "y": 1400000,
+     "w": 4800000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 785800,
+     "y": 1500000,
+     "w": 4500000,
+     "h": 330000,
+     "z": 2,
+     "text": "101 项用例 · 11 个文件",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 785800,
+     "y": 1900000,
+     "w": 4500000,
+     "h": 300000,
+     "z": 2,
+     "text": "覆盖规则、数据、鉴权、CSRF、串口、",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e3",
+     "type": "text",
+     "x": 785800,
+     "y": 2230000,
+     "w": 4500000,
+     "h": 300000,
+     "z": 2,
+     "text": "设备心跳、页面壳与移动端布局。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r2",
+     "type": "rect",
+     "x": 685800,
+     "y": 2900000,
+     "w": 4800000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e4",
+     "type": "text",
+     "x": 785800,
+     "y": 3000000,
+     "w": 4500000,
+     "h": 330000,
+     "z": 2,
+     "text": "阈值口径同步",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e5",
+     "type": "text",
+     "x": 785800,
+     "y": 3380000,
+     "w": 4500000,
+     "h": 300000,
+     "z": 2,
+     "text": "阈值与历史口径对齐设置页。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "r3",
+     "type": "rect",
+     "x": 685800,
+     "y": 4400000,
+     "w": 4800000,
+     "h": 1300000,
+     "z": 1,
+     "fill": "blue_soft",
+     "line_color": "line",
+     "line_width": 1,
+     "radius": 0.08
+    },
+    {
+     "id": "e6",
+     "type": "text",
+     "x": 785800,
+     "y": 4500000,
+     "w": 4500000,
+     "h": 330000,
+     "z": 2,
+     "text": "可复核",
+     "font": "h3",
+     "bold": true,
+     "color": "ink",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e7",
+     "type": "text",
+     "x": 785800,
+     "y": 4880000,
+     "w": 4500000,
+     "h": 300000,
+     "z": 2,
+     "text": "源码、测试输出、现场演示三重证据。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "tests_dist",
+     "area": {
+      "x": 5800000,
+      "y": 1400000,
+      "w": 5706200,
+      "h": 4200000
+     }
+    }
+   ],
+   "notes": "成果是可度量的。测试套件一共 101 个用例、11 个测试文件，覆盖规则引擎、数据层、鉴权、CSRF、串口链路、设备心跳与离线，还有页面壳和移动端布局。规则引擎里防刷屏和分级判定的用例也在其中。另外，历史页会动态拉取当前生效阈值，超限统计和阈值线跟设置页保持一致。每个结论都能用源码、测试输出或现场演示复核。"
+  },
+  {
+   "slide_id": "s13_boundary",
+   "chrome": "standard",
+   "section": "诚实边界",
+   "title": "诚实边界与扩展方向",
+   "lead": "边界不是减分项，是可信度。",
+   "seconds": 45,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 685800,
+     "y": 4730000,
+     "w": 10820400,
+     "h": 330000,
+     "z": 2,
+     "text": "拿不出证据的，就如实说「待实测」。",
+     "font": "h3",
+     "bold": true,
+     "color": "teal",
+     "align": "left",
+     "valign": "top"
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 685800,
+     "y": 5110000,
+     "w": 10820400,
+     "h": 350000,
+     "z": 2,
+     "text": "单设备原型 · 相对应变指标无量纲 · 采样周期 1 秒 · 未做长期稳定性验证。",
+     "font": "body",
+     "color": "slate",
+     "align": "left",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "boundary_grid",
+     "area": {
+      "x": 685800,
+      "y": 1350000,
+      "w": 10820400,
+      "h": 3250000
+     }
+    }
+   ],
+   "notes": "最后是边界。当前是单设备原型，没有做冗余；输出的是相对应变指标，无量纲，不是工程应变；采样周期 1 秒，不是毫秒级；也没有做长期稳定性验证。这些如实说。扩展方向很明确：多测点接入、HTTP 备份通道、更长时间的老化与稳定性测试，以及更细的标定流程。拿不出证据的，就如实写「待实测」。"
+  },
+  {
+   "slide_id": "s14_value",
+   "chrome": "standard",
+   "section": "价值收束",
+   "title": "价值总结",
+   "lead": "三个词，概括这套系统。",
+   "seconds": 40,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 2100000,
+     "y": 2650000,
+     "w": 7986560,
+     "h": 600000,
+     "z": 2,
+     "text": "说得出口的，必须拿得出证据",
+     "font": "h1",
+     "bold": true,
+     "color": "teal",
+     "align": "center",
+     "valign": "middle",
+     "letter_spacing": 2
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 2100000,
+     "y": 3400000,
+     "w": 7986560,
+     "h": 420000,
+     "z": 2,
+     "text": "做完整的监测闭环，不做无法佐证的能力描述。",
+     "font": "h2",
+     "color": "ink",
+     "align": "center",
+     "valign": "middle"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "value_tri",
+     "area": {
+      "x": 1188720,
+      "y": 1188720,
+      "w": 9826560,
+      "h": 4846320
+     }
+    }
+   ],
+   "notes": "如果只让我用三个词总结这个作品：可解释、可追溯、不造假。每条报警说得出为什么，每次改动和处置都留得下痕迹，每句结论都拿得出源码、测试或演示来证明。做完整的监测闭环，不做无法佐证的能力描述。这就是我想交付的东西。"
+  },
+  {
+   "slide_id": "s15_thanks",
+   "chrome": "none",
+   "section": null,
+   "title": "致谢",
+   "lead": null,
+   "seconds": 25,
+   "elements": [
+    {
+     "id": "e1",
+     "type": "text",
+     "x": 3000000,
+     "y": 2600000,
+     "w": 6192000,
+     "h": 800000,
+     "z": 2,
+     "text": "谢谢各位评委",
+     "font": "hero",
+     "bold": true,
+     "color": "white",
+     "align": "center",
+     "valign": "middle",
+     "letter_spacing": 3
+    },
+    {
+     "id": "e2",
+     "type": "text",
+     "x": 2200000,
+     "y": 3550000,
+     "w": 7792000,
+     "h": 350000,
+     "z": 2,
+     "text": "接下来请看现场演示：模拟数据源 + 浏览器三维可视化监测场景",
+     "font": "body",
+     "color": "slate_light",
+     "align": "center",
+     "valign": "top"
+    }
+   ],
+   "layout_map": [
+    {
+     "fig_id": "thanks_geo",
+     "area": {
+      "x": 0,
+      "y": 0,
+      "w": 12192000,
+      "h": 6858000
+     }
+    }
+   ],
+   "notes": "我的汇报到这里。这套系统的每一处结论，都能用源码、测试或现场演示复核。接下来请看现场演示。谢谢各位评委。"
+  }
+ ]
+}

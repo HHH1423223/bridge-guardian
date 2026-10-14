@@ -163,19 +163,31 @@ def browser():
         h.stop()
 
 
-def _open(h, path, viewport):
+def _open(h, path, viewport, ready=None):
+    """打开页面并把视口固定到指定尺寸。
+
+    ready: 可选 CSS 选择器。给了就轮询等它出现（默认 10s 超时）。
+    背景（2026-10-02）：这里原先只 time.sleep(0.9) 就断言业务容器存在，
+    在负载高的机器上偶发「页面缺失 .dv-3col」——是竞态不是产品缺陷
+    （9 次全量跑复现约 1/5 概率红）。改成等待真实就绪条件，消除不确定性。
+    """
     import time
     h.page.set_viewport(*viewport)
     h.page.goto(path)
     h.page.wait_for("document.readyState === 'complete'", timeout=25)
-    time.sleep(0.9)
+    if ready:
+        h.page.wait_for(
+            f"document.querySelector({ready!r}) !== null",
+            timeout=10, label=f"等待 {ready} 出现（{path} @{viewport}）")
+    else:
+        time.sleep(0.9)
 
 
 @pytest.mark.parametrize("viewport", [(320, 568), (360, 640), (390, 700), (390, 844),
                                       (412, 915), (430, 932), (440, 979)])
 def test_device_mobile_no_text_overlap(browser, viewport):
     """手机端 /device 在任何常见视口都不许出现文字互相压住（含卡片内容漏出）。"""
-    _open(browser, "/device", viewport)
+    _open(browser, "/device", viewport, ready=".dv-3col")
     spill = browser.page.eval_js(CARD_SPILL_JS)
     assert not spill.get("missing"), "页面缺少 .dv-3col"
     assert spill["spill"] <= 0, (

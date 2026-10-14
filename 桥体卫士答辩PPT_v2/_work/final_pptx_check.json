@@ -1,0 +1,19 @@
+{
+  "format": "pptx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "count",
+      "status": "pass",
+      "expected": 15,
+      "actual": 15
+    }
+  ],
+  "summary": {
+    "slides": 15
+  }
+}

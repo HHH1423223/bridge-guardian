@@ -53,7 +53,7 @@ import * as themeMod from './theme.js';
 import * as canyonMod from './canyon.js';
 
 const RISK_KEY = { 0: 'normal', 1: 'warn', 2: 'alarm', 3: 'crit', 4: 'offline' };
-const CANVAS_LABEL = '花江峡谷大桥三维数字孪生场景（可旋转、缩放、平移）';
+const CANVAS_LABEL = '花江峡谷大桥三维可视化监测场景（可旋转、缩放、平移）';
 
 /* ---- P2 帧率/空载/双驱动的全部阈值（都在这里，便于现场解释） ---- */
 const IDLE_AFTER_MS = 600;             // 真正静止 600ms → 空载降载（契约 §4.2）

@@ -1,0 +1,17 @@
+﻿### FULL SUITE x6 (tail summary only)
+run 1 : 101 passed in 15.32s
+run 2 : 101 passed in 15.35s
+run 3 : 101 passed in 15.34s
+run 4 : 101 passed in 15.22s
+run 5 : 101 passed in 15.19s
+run 6 : FAILED tests/test_mobile_layout.py::test_device_mobile_no_text_overlap[viewport0] | 1 failed, 100 passed in 15.43s
+### FOCUSED: test_mobile_layout.py x8
+focus 1 : 12 passed in 13.69s
+focus 2 : 1 failed, 11 passed in 13.82s
+focus 3 : 1 failed, 11 passed in 13.82s
+focus 4 : 12 passed in 13.69s
+focus 5 : 12 passed in 13.78s
+focus 6 : 1 failed, 11 passed in 13.88s
+focus 7 : 12 passed in 13.84s
+focus 8 : 12 passed in 13.72s
+### DONE

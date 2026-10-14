@@ -21,7 +21,7 @@ export function buildHud(api, host) {
   const factRows = FACT_SHEET.slice(0, 6).map((r) =>
     '<div class="th-row"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join('');
   info.innerHTML =
-    '<div class="th-head"><i></i>花江峡谷大桥 · 三维数字孪生<span class="th-mode" id="twinMode">实体</span></div>' +
+    '<div class="th-head"><i></i>花江峡谷大桥 · 三维可视化监测场景<span class="th-mode" id="twinMode">实体</span></div>' +
     '<div class="th-rows">' + factRows + '</div>' +
     '<div class="th-stat">' +
       '<span>桁梁杆件 <b>' + stats.trussMembers + '</b></span>' +

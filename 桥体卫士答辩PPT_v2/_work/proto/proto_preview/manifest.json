@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "pdfium",
+  "source": "saved",
+  "inputPath": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\proto\\proto.pdf",
+  "sourceSha256": "0eebdd5e63909a0d20d0185b6b851880820833409c1431f531529c27c6047dcb",
+  "dpi": 130,
+  "pageCount": 2,
+  "images": [
+    {
+      "index": 1,
+      "page": 1,
+      "path": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\proto\\proto_preview\\page-0001.png",
+      "width": 1734,
+      "height": 975,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "byteLength": 1759697
+    }
+  ],
+  "missingFonts": []
+}

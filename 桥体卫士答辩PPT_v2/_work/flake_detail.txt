@@ -1,0 +1,57 @@
+﻿### pytest plugins
+pytest 9.1.1
+### pip list (pytest-related)
+
+Flask          3.1.3
+pluggy         1.6.0
+pyserial       3.5
+pytest         9.1.1
+
+
+### collect-only per file
+tests/test_shell.py::test_templates_import_shell_macro
+tests/test_shell.py::test_app_py_has_new_page_routes
+
+101 tests collected in 0.02s
+
+Count Name                       
+----- ----                       
+    9 tests/test_api.py          
+    5 tests/test_auth.py         
+    4 tests/test_csrf.py         
+    3 tests/test_db.py           
+    3 tests/test_device.py       
+   12 tests/test_mobile_layout.py
+   11 tests/test_mobile_no_3d.py 
+    8 tests/test_rules.py        
+    5 tests/test_serial_flow.py  
+   41 tests/test_shell.py        
+
+
+
+### repeat until failure (max 12), capture traceback
+attempt 1 : pass
+FAILED on attempt 2
+F......                                                                  [100%]
+================================== FAILURES ===================================
+________________ test_device_mobile_no_text_overlap[viewport0] ________________
+
+browser = <browser_harness.Harness object at 0x00000000053B8AD0>
+viewport = (320, 568)
+
+    @pytest.mark.parametrize("viewport", [(320, 568), (360, 640), (390, 700), (390, 844),
+                                          (412, 915), (430, 932), (440, 979)])
+    def test_device_mobile_no_text_overlap(browser, viewport):
+        """�ֻ��� /device ���κγ����ӿڶ�����������ֻ���ѹס������Ƭ����©������"""
+        _open(browser, "/device", viewport)
+        spill = browser.page.eval_js(CARD_SPILL_JS)
+>       assert not spill.get("missing"), "ҳ��ȱ�� .dv-3col"
+E       AssertionError: ҳ��ȱ�� .dv-3col
+E       assert not True
+E        +  where True = <built-in method get of dict object at 0x0000000005AEF7C0>('missing')
+E        +    where <built-in method get of dict object at 0x0000000005AEF7C0> = {'missing': True}.get
+
+tests\test_mobile_layout.py:180: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_mobile_layout.py::test_device_mobile_no_text_overlap[viewport0]
+1 failed, 6 passed in 8.74s

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "pdfium",
+  "source": "saved",
+  "inputPath": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\anim_v2.pdf",
+  "sourceSha256": "2f29756a11bdd57c7f8ee2b0f4234fa6ae22be5596b2c61a3705b06965a4f8e1",
+  "dpi": 110,
+  "pageCount": 15,
+  "images": [
+    {
+      "index": 1,
+      "page": 3,
+      "path": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\anim_v2_preview\\page-0001.png",
+      "width": 1467,
+      "height": 825,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "byteLength": 185614
+    },
+    {
+      "index": 2,
+      "page": 7,
+      "path": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\anim_v2_preview\\page-0002.png",
+      "width": 1467,
+      "height": 825,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "byteLength": 169197
+    },
+    {
+      "index": 3,
+      "page": 15,
+      "path": "C:\\Users\\CX\\Documents\\GitHub\\bridge guardian\\桥体卫士答辩PPT_v2\\_work\\anim_v2_preview\\page-0003.png",
+      "width": 1467,
+      "height": 825,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "byteLength": 51913
+    }
+  ],
+  "missingFonts": []
+}

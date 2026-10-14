@@ -1,0 +1,65 @@
+{
+ "deck": {
+  "title": "smoke",
+  "slides_total": 15,
+  "duration_seconds": 720,
+  "speaker": "单人主讲",
+  "hardware_on_stage": false
+ },
+ "slides": [
+  {
+   "slide_id": "s01_cover",
+   "chrome": "none",
+   "section": null,
+   "title": "桥体卫士",
+   "seconds": 30,
+   "elements": [
+    {
+     "id": "t1",
+     "type": "text",
+     "x": 685800,
+     "y": 2743200,
+     "w": 6096000,
+     "h": 914400,
+     "text": "桥体卫士",
+     "font": "display",
+     "bold": true,
+     "color": "ink"
+    },
+    {
+     "id": "t2",
+     "type": "text",
+     "x": 685800,
+     "y": 3657600,
+     "w": 6096000,
+     "h": 457200,
+     "text": "桥梁结构健康监测缩尺原型",
+     "font": "h2",
+     "color": "slate"
+    }
+   ],
+   "notes": "这是一段测试讲稿，用于验证 notes 写入。"
+  },
+  {
+   "slide_id": "s06_video",
+   "chrome": "standard",
+   "section": "现场演示",
+   "title": "软件全链路演示",
+   "seconds": 60,
+   "elements": [
+    {
+     "id": "t1",
+     "type": "text",
+     "x": 685800,
+     "y": 1188720,
+     "w": 4572000,
+     "h": 457200,
+     "text": "一分钟看完整链路",
+     "font": "h2",
+     "color": "ink"
+    }
+   ],
+   "notes": "测试。"
+  }
+ ]
+}
