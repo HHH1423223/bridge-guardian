@@ -7,64 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>历史与导出 - 桥体卫士</title>
   <meta name="theme-color" content="#ffffff">
-  <!-- 内联 SVG 图标（data URI，绿色版）：避免浏览器自动探测 /favicon.ico 产生 404 -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Cpath d='M5 23h22M5 23c3-6 7.5-9 11-9s8 3 11 9M16 14V7M9 7h14' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <!-- 内联 SVG 图标（data URI）：避免浏览器自动探测 /favicon.ico 产生 404 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Cpath d='M5 23h22M5 23c3-6 7.5-9 11-9s8 3 11 9M16 14V7M9 7h14' fill='none' stroke='%2316181d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
   <script src="/static/echarts.min.js"></script>
-  <link rel="stylesheet" href="/static/app.css">
-  {# 共享骨架样式（侧栏/顶栏/抽屉），全站只有 _shell.html 一份定义 #}
+  {# 共享骨架样式（侧栏/顶栏/抽屉）+ 三个全局 CSS #}
   {{ shell.shell_head() }}
   <style>
-    /* 页面级样式：只写布局，配色一律走 app.css 第 20 节主题变量 */
-    .his-tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-    .his-tabs button { min-height: 40px; padding: 0 18px; font: inherit; font-size: 14px; cursor: pointer;
-      border-radius: 8px; color: var(--muted, #6b7280); background: #fff;
-      border: 1px solid var(--border, #e5e8eb); }
-    .his-tabs button:hover { color: var(--text-strong, #111827); border-color: var(--line, #d5dae0); }
-    .his-tabs button.active { color: var(--accent, #16a34a); font-weight: 600;
-      background: var(--accent-soft, rgba(22, 163, 74, .10));
-      border-color: var(--accent-border, rgba(22, 163, 74, .34)); }
-    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; align-items: flex-end; }
-    .filters label { display: flex; flex-direction: column; gap: 4px; color: var(--muted, #6b7280); font-size: 12.5px; }
-    .filters input { padding: 9px 11px; font: inherit; font-size: 14px; min-height: 44px;
-      border: 1px solid var(--border, #e5e8eb); border-radius: 8px;
-      background: var(--bg, #f6f8f9); color: var(--text, #1f2937); color-scheme: light; }
-    .filters input:focus { border-color: var(--accent, #16a34a); background: #fff; outline: none;
-      box-shadow: 0 0 0 3px var(--accent-glow, rgba(22, 163, 74, .18)); }
-    .filters .btn { min-height: 44px; padding: 0 18px; font-size: 13.5px; }
-    .filters .btn-ghost { background: #fff; }
-    .message { color: var(--crit, #be123c); margin: 6px 0 14px; min-height: 18px; font-size: 13px; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
-    .stat { background: #fff; border: 1px solid var(--border, #e5e8eb); border-radius: 10px;
-      padding: 14px 12px; text-align: center; }
-    .stat span { display: block; font-size: 26px; font-weight: 700; color: var(--accent, #16a34a);
-      font-variant-numeric: tabular-nums; }
-    .stat label { font-size: 12px; color: var(--muted, #6b7280); }
-    /* 历史报警时间线 */
-    .timeline { position: relative; padding: 4px 0; }
-    .tl-item { display: flex; gap: 12px; padding: 10px 0; position: relative; }
-    .tl-item::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px;
-      background: var(--border, #e5e8eb); }
-    .tl-dot { width: 16px; height: 16px; border-radius: 50%; flex: 0 0 auto; margin-top: 2px;
-      position: relative; z-index: 1; }
-    .tl-dot.lv-warn { background: var(--warn, #b45309); }
-    .tl-dot.lv-alarm { background: var(--alarm, #c2410c); }
-    .tl-dot.lv-crit { background: var(--crit, #be123c); }
-    .tl-dot.lv-offline { background: var(--offline, #6b7280); }
-    .tl-body { flex: 1; background: var(--bg-2, #f8fafb); border: 1px solid var(--border, #e5e8eb);
-      border-radius: 8px; padding: 10px 12px; min-width: 0; }
-    .tl-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .tl-level { font-weight: 700; font-size: 13px; }
-    .tl-rule { color: var(--accent, #16a34a); font-size: 12px;
-      background: var(--accent-soft, rgba(22, 163, 74, .10)); padding: 2px 9px; border-radius: 12px; }
-    .tl-time { color: var(--muted, #6b7280); font-size: 12px; margin-left: auto; }
-    .tl-src { color: var(--muted, #6b7280); font-size: 12px; }
-    .tl-reason { color: var(--text, #1f2937); font-size: 13px; margin-top: 6px; line-height: 1.6; word-break: break-word; }
-    .tl-status { color: var(--muted, #6b7280); font-size: 12px; margin-top: 6px; }
-    .tl-status.done { color: var(--ok, #15803d); }
-    .tl-empty { text-align: center; color: var(--muted, #6b7280); padding: 26px 0; }
-    @media (max-width: 760px) {
-      .tl-time { margin-left: 0; width: 100%; }
-      .stat { padding: 12px 10px; }
+    /* 本页只写布局：区域栅格、固定高度、排列顺序（规范 5.0）。 */
+
+    .his-stack { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+    /* 标签页与筛选栏之间 16px（5.5.1） */
+    .his-tabs { margin-bottom: 0; }
+    .filters { margin-top: var(--sp-4); margin-bottom: 0; }
+    #historyMessage { margin-top: var(--sp-3); margin-bottom: 0; }
+
+    /* 历史报警面板：标题栏贴边，表格内容区不带内边距（4.12.7） */
+    .his-panel { display: flex; flex-direction: column; padding: 0; }
+    .his-panel > .pg-head { margin-bottom: 0; padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--border-subtle); }
+    .his-panel > .table-wrap { flex: 1 1 auto; }
+
+    /* 「历史数据比对」：5 等分统计 + 分隔线 + 曲线，全部在同一面板内（5.5.2） */
+    .his-panel > .stats { border-bottom: 1px solid var(--border-subtle); }
+    .his-chart-host { width: 100%; height: 340px; padding: var(--sp-4); }
+
+    /* 表格列宽（4.3.2 的列规范，紧凑模式、无操作列） */
+    .his-col-t { width: 160px; }
+    .his-col-v { width: 96px; }
+    .his-col-l { width: 96px; }
+    .his-col-r { width: 112px; }
+    .his-col-s { width: 80px; }
+
+    /* 手机端：图表降高（3.4.3） */
+    @media (max-width: 768px) {
+      .his-chart-host { height: 240px; padding: var(--sp-3); }
+      .his-col-t, .his-col-v, .his-col-l, .his-col-r, .his-col-s { width: auto; }
     }
   </style>
 </head>
@@ -77,44 +54,57 @@
   {{ shell.shell_sidebar('history') }}
 
   <div class="sh-main">
-    {{ shell.shell_topbar('历史与导出', '历史报警追溯 · 历史数据比对 · CSV 导出（UTF-8 BOM，Excel 中文不乱码）', 'history') }}
+    {{ shell.shell_topbar('历史与导出', '历史报警追溯 · 历史数据比对 · CSV 导出', 'history') }}
 
     <main class="sh-content">
-      <div class="sh-page">
+      <div class="sh-page his-stack">
 
-        <div class="his-tabs">
-          <button id="tabAlarm" class="active" onclick="switchTab('alarm')">历史报警</button>
-          <button id="tabData" onclick="switchTab('data')">历史数据比对</button>
+        <div class="his-tabs" role="tablist">
+          <button id="tabAlarm" class="active" role="tab" aria-selected="true" onclick="switchTab('alarm')">历史报警</button>
+          <button id="tabData" role="tab" aria-selected="false" onclick="switchTab('data')">历史数据比对</button>
         </div>
 
         <div class="filters">
           <label>开始时间 <input id="startTime" type="datetime-local"></label>
           <label>结束时间 <input id="endTime" type="datetime-local"></label>
           <button class="btn btn-blue" onclick="applyFilter()">查询</button>
-          <button class="btn btn-ghost" onclick="exportHistory()">导出当前结果 CSV</button>
+          <button class="btn btn-ghost" onclick="exportHistory()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v10"/><path d="M8.2 10.4L12 14.2l3.8-3.8"/><path d="M4.8 18.4h14.4"/>
+            </svg>
+            导出当前结果 CSV
+          </button>
         </div>
 
-        <p id="historyMessage" class="message"></p>
+        <p id="historyMessage" class="message" role="status"></p>
 
-        <div id="alarmSection" class="card">
-          <div id="histAlarmTable" class="timeline"></div>
-        </div>
-
-        <div id="dataSection" style="display:none">
-          <div class="stats">
-            <div class="stat"><span id="avgAll">--</span><label>平均应变指标</label></div>
-            <div class="stat"><span id="maxAll">--</span><label>最大值</label></div>
-            <div class="stat"><span id="minAll">--</span><label>最小值</label></div>
-            <div class="stat"><span id="overCount">--</span><label>超限次数 (<span id="overCountLabel">>{{ threshold }}</span>)</label></div>
-            <div class="stat"><span id="compare">--</span><label>后半段 vs 前半段均值</label></div>
+        <!-- 历史报警：报警记录统一为与处置队列一致的表格（紧凑模式、无操作列） -->
+        <div id="alarmSection" class="card his-panel">
+          <div class="pg-head">
+            <h3>历史报警</h3>
+            <span class="pg-sub">按时间倒序 · 含处置状态</span>
+            <span class="pg-sub" id="alarmCount"></span>
           </div>
-          <div class="card"><div id="histChart" style="width:100%;height:340px"></div></div>
+          <div class="table-wrap" id="histAlarmTable"></div>
         </div>
 
-        <p style="font-size:11.5px;color:var(--faint,#9ca3af);line-height:1.7;margin-top:16px">
-          单位口径：{{ unit }}（相对应变指标，无量纲，非工程微应变）· 数据全部来自
-          <b>/api/history_alarms</b> 与 <b>/api/history_data</b>（SQLite 落盘记录）；
-          导出走 <b>/api/export/alarms</b> 与 <b>/api/export/data</b>，CSV 带 UTF-8 BOM。
+        <!-- 历史数据比对：统计指标 × 5 + 历史曲线，同属一个面板 -->
+        <div id="dataSection" class="card his-panel" style="display:none">
+          <div class="stats">
+            <div class="stat"><span class="num" id="avgAll">--</span><label>平均应变指标</label></div>
+            <div class="stat"><span class="num" id="maxAll">--</span><label>最大值</label></div>
+            <div class="stat"><span class="num" id="minAll">--</span><label>最小值</label></div>
+            <div class="stat"><span class="num" id="overCount">--</span><label>超限次数 (&gt;<span class="num" id="overCountLabel">{{ threshold }}</span>)</label></div>
+            <div class="stat"><span class="num" id="compare">--</span><label>后半段 vs 前半段均值</label></div>
+          </div>
+          <div id="histChart" class="his-chart-host"></div>
+        </div>
+
+        <p class="pg-foot">
+          <span>单位口径：{{ unit }}（相对应变指标，无量纲，非工程微应变）· 数据全部来自
+            <b>/api/history_alarms</b> 与 <b>/api/history_data</b>（SQLite 落盘记录）；
+            导出走 <b>/api/export/alarms</b> 与 <b>/api/export/data</b>，CSV 带 UTF-8 BOM。</span>
         </p>
 
       </div>
@@ -122,14 +112,18 @@
   </div><!-- /.sh-main -->
 </div><!-- /.sh-layout -->
 
+<script src="/static/js/charts.js"></script>
 <script>
   /* ====================================================================
      /history 页面脚本（沿用原实现：查询、比对统计、CSV 导出）
-     改动仅限视觉：ECharts 轴/分割线/tooltip/渐变/markLine 全部改浅色可读配色，
-     逻辑、接口、字段、口径一处未动。
+     规范化改动：
+       · ECharts 全部颜色/字号从 CSS token 运行时读取（4.4.1），不再写色值字面量
+       · 主数据线改墨色、关闭平滑、面积纯色、阈值虚线（4.5）
+       · 历史报警由时间线改为表格（8.6 C6 已批准）
+       · 主题切换时重建配置（不销毁实例）
      ==================================================================== */
-  let currentThreshold = {{ threshold }}; // 当前生效报警阈值（动态同步，与设置页/大屏一致）
-  let currentTab = 'alarm'; // 当前打开的历史记录标签页
+  let currentThreshold = {{ threshold }};
+  let currentTab = 'alarm';
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, function (c) {
@@ -137,17 +131,32 @@
     });
   }
 
-  function showHistoryMessage(message) {
-    document.getElementById('historyMessage').textContent = message;
+  function showHistoryMessage(message, isError) {
+    const el = document.getElementById('historyMessage');
+    el.textContent = message;
+    el.className = 'message' + (isError ? ' error' : '');
+  }
+
+  /* 后端等级的 5 态键（与 data-risk 一一对应） */
+  function riskKeyOf(level) {
+    if (level === '严重报警') return 'crit';
+    if (level === '报警') return 'alarm';
+    if (level === '预警') return 'warn';
+    if (level === '设备恢复') return 'normal';
+    return 'offline';
   }
 
   function switchTab(tabName) {
     currentTab = tabName;
     const isAlarmTab = tabName === 'alarm';
-    document.getElementById('alarmSection').style.display = isAlarmTab ? 'block' : 'none';
-    document.getElementById('dataSection').style.display = isAlarmTab ? 'none' : 'block';
-    document.getElementById('tabAlarm').className = isAlarmTab ? 'active' : '';
-    document.getElementById('tabData').className = isAlarmTab ? '' : 'active';
+    document.getElementById('alarmSection').style.display = isAlarmTab ? 'flex' : 'none';
+    document.getElementById('dataSection').style.display = isAlarmTab ? 'none' : 'flex';
+    const a = document.getElementById('tabAlarm');
+    const d = document.getElementById('tabData');
+    a.className = isAlarmTab ? 'active' : '';
+    d.className = isAlarmTab ? '' : 'active';
+    a.setAttribute('aria-selected', isAlarmTab ? 'true' : 'false');
+    d.setAttribute('aria-selected', isAlarmTab ? 'false' : 'true');
     showHistoryMessage('');
     if (isAlarmTab) loadAlarms(); else loadData();
   }
@@ -167,37 +176,163 @@
     window.location.href = `/api/export/${recordType}?${getQueryString()}`;
   }
 
+  /* ---------------- 历史报警：表格（紧凑模式，无操作列） ---------------- */
   async function loadAlarms() {
     try {
       const response = await fetch(`/api/history_alarms?${getQueryString()}`);
       if (response.status === 401) { window.location.href = '/login'; return; }
       if (!response.ok) throw new Error(`请求失败：${response.status}`);
-      const alarmRows = await response.json();
-      const lvCls = l => l === '严重报警' ? 'lv-crit' : (l === '报警' ? 'lv-alarm' : (l === '预警' ? 'lv-warn' : 'lv-offline'));
-      const lvColor = l => l === '严重报警' ? 'var(--crit)' : (l === '报警' ? 'var(--alarm)' : (l === '预警' ? 'var(--warn)' : 'var(--offline)'));
-      const html = alarmRows.slice().reverse().map(a =>
-        `<div class="tl-item">
-          <div class="tl-dot ${lvCls(a.level)}"></div>
-          <div class="tl-body">
-            <div class="tl-top">
-              <span class="tl-level" style="color:${lvColor(a.level)}">${escapeHtml(a.level)}</span>
-              <span class="tl-rule">${escapeHtml(a.rule)}</span>
-              <span class="tl-time">${escapeHtml(a.ts)}</span>
-              <span class="tl-src">${a.source === 'serial' ? '真实设备' : (a.source === 'sim' ? '模拟' : '历史导入')}</span>
-            </div>
-            <div class="tl-reason">${escapeHtml(a.reason)}</div>
-            <div class="tl-status ${a.status === '已处理' ? 'done' : ''}">${a.status === '已处理' ? '✓ 已处理' : '● 未处理'}</div>
-          </div>
-        </div>`).join('');
+      const rows = await response.json();
+      document.getElementById('alarmCount').textContent = rows.length ? `共 ${rows.length} 条` : '';
+      if (!rows.length) {
+        document.getElementById('histAlarmTable').innerHTML =
+          '<p class="empty">所选时间范围内没有记录<span class="bg-empty__hint">请调整开始和结束时间后重新查询</span></p>';
+        return;
+      }
+      const body = rows.slice().reverse().map(function (a) {
+        const key = riskKeyOf(a.level);
+        const isDevice = (a.rule === '设备离线' || a.rule === '设备恢复');
+        const statusHtml = a.status === '已处理'
+          ? '<span class="bg-status"><i class="bg-dot" style="background:var(--risk-normal-main)"></i>已处理</span>'
+          : '<span class="bg-status"><i class="bg-dot bg-dot--hollow"></i>未处理</span>';
+        return `<tr data-risk="${key}" data-status="${escapeHtml(a.status)}">
+          <td class="num">${escapeHtml(a.ts)}</td>
+          <td class="num">${isDevice ? '--' : escapeHtml(a.value)}</td>
+          <td><span class="bg-badge" data-risk="${key}">${escapeHtml(a.level)}</span></td>
+          <td>${escapeHtml(a.rule)}</td>
+          <td class="reason-cell">${escapeHtml(a.reason)}</td>
+          <td>${statusHtml}</td>
+        </tr>`;
+      }).join('');
       document.getElementById('histAlarmTable').innerHTML =
-        html || '<div class="tl-empty">暂无历史报警</div>';
+        `<table class="data-table bg-table--compact">
+          <thead><tr>
+            <th class="his-col-t">时间</th>
+            <th class="his-col-v" style="text-align:right">应变指标</th>
+            <th class="his-col-l">等级</th>
+            <th class="his-col-r">规则</th>
+            <th>原因</th>
+            <th class="his-col-s">状态</th>
+          </tr></thead>
+          <tbody>${body}</tbody>
+        </table>`;
     } catch (error) {
       console.error('读取历史报警失败', error);
-      showHistoryMessage('历史报警读取失败，请检查数据库和服务状态。');
+      showHistoryMessage('历史报警读取失败，请检查数据库和服务状态。', true);
     }
   }
 
+  /* ---------------- 历史数据比对：统计 + 曲线 ---------------- */
   let historyChart = null;
+  let lastSeries = null;
+
+  function chartOption(T, times, values) {
+    const tiny = { fontSize: T.fs2xsPx, fontFamily: T.fontDataName };
+    const label = { color: T.label, ...tiny };
+    return {
+      animation: false,
+      textStyle: { fontFamily: T.fontDataName },
+      grid: { left: 8, right: 16, top: 16, bottom: 32, containLabel: true },
+      xAxis: {
+        type: 'category', data: times, boundaryGap: false,
+        axisLine: { lineStyle: { color: T.axis, width: 1 } },
+        axisTick: { show: false },
+        axisLabel: { ...label, margin: 8, hideOverlap: true, formatter: (v) => String(v).slice(11) },
+        splitLine: { show: false },
+      },
+      yAxis: {
+        type: 'value',
+        scale: true,
+        /* 阈值线必须始终在可视范围内：上限取「数据最大值」与「阈值 × 1.25」中的较大者（4.5.2） */
+        max: function (v) { return Math.max(v.max, currentThreshold * 1.25); },
+        axisLine: { show: false }, axisTick: { show: false },
+        splitNumber: 4,
+        splitLine: { lineStyle: { color: T.grid, width: 1 } },
+        axisLabel: { ...label, margin: 8 },
+      },
+      tooltip: Object.assign({
+        trigger: 'axis',
+        axisPointer: { type: 'line', lineStyle: { color: T.crosshair, width: 1 } },
+        formatter: function (params) {
+          const p = params[0]; if (!p) return '';
+          const v = Number(p.data);
+          const risk = v > currentThreshold * 1.2 ? 'crit'
+            : v > currentThreshold * 1.1 ? 'alarm'
+            : v > currentThreshold ? 'warn' : '';
+          return `<div style="font-size:${T.fsXsPx}px;color:inherit;opacity:.72">${escapeHtml(p.axisValue)}</div>` +
+                 `<div><b>应变指标 ${v.toFixed(2)}</b></div>` +
+                 (risk ? `<div style="margin-top:2px">${BOChartBadge(risk)}</div>` : '');
+        },
+      }, BOChartTooltip(T)),
+      dataZoom: [
+        { type: 'inside', start: 0, end: 100 },
+        {
+          type: 'slider', height: 24, bottom: 0,
+          borderColor: 'transparent', backgroundColor: T.bgSunken,
+          fillerColor: T.accentSoft, handleSize: 16,
+          handleStyle: { color: T.bgSurface, borderColor: T.borderDefault, borderWidth: 1 },
+          moveHandleStyle: { color: T.accentBorder },
+          dataBackground: { lineStyle: { color: T.seriesSecondary, width: 1 }, areaStyle: { color: 'transparent' } },
+          selectedDataBackground: { lineStyle: { color: T.seriesSecondary, width: 1 }, areaStyle: { color: 'transparent' } },
+          textStyle: { color: T.label, fontSize: T.fs2xsPx },
+          emphasis: { handleStyle: { borderColor: T.accentDefault } },
+        },
+      ],
+      series: [{
+        name: '应变指标', type: 'line', data: values,
+        smooth: false, showSymbol: false, sampling: 'lttb',
+        lineStyle: { color: T.seriesPrimary, width: 1.5 },
+        itemStyle: { color: T.seriesPrimary, borderColor: T.bgSurface, borderWidth: 2 },
+        areaStyle: { color: T.area },
+        emphasis: { scale: 1, itemStyle: { color: T.seriesPrimary } },
+        markLine: {
+          symbol: 'none', silent: true,
+          lineStyle: { color: T.threshold, width: 1, type: [6, 4] },
+          label: {
+            color: T.riskAlarmText, fontSize: T.fs2xsPx, fontFamily: T.fontDataName,
+            formatter: '阈值 ' + currentThreshold, position: 'insideEndTop', distance: [0, 4],
+          },
+          data: [{ yAxis: currentThreshold }],
+        },
+      }],
+      /* 超限区段着色（4.5.4）：≤阈值墨色 / 1.0–1.1 预警 / 1.1–1.2 报警 / >1.2 严重。
+         visualMap 必须是 option 根级组件，不能写在 series 里。 */
+      visualMap: {
+        show: false, type: 'piecewise', dimension: 1, seriesIndex: 0,
+        pieces: [
+          { lte: currentThreshold, color: T.seriesPrimary },
+          { gt: currentThreshold, lte: currentThreshold * 1.1, color: T.riskWarn },
+          { gt: currentThreshold * 1.1, lte: currentThreshold * 1.2, color: T.riskAlarm },
+          { gt: currentThreshold * 1.2, color: T.riskCrit },
+        ],
+      },
+    };
+  }
+
+  /* 小工具：与 charts.js 保持同一外观口径 */
+  function BOChartTooltip(T) {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      backgroundColor: dark ? T.bgRaised : T.textPrimary,
+      borderColor: dark ? T.borderStrong : 'transparent',
+      borderWidth: dark ? 1 : 0,
+      padding: [4, 8],
+      textStyle: { color: dark ? T.textPrimary : T.textInverse, fontSize: T.fsXsPx, fontFamily: T.fontDataName },
+      extraCssText: 'border-radius:4px;',
+    };
+  }
+  function BOChartBadge(risk) {
+    const map = { warn: ['预警', '--risk-warn-bg', '--risk-warn-text', '--risk-warn-border'],
+                  alarm: ['报警', '--risk-alarm-bg', '--risk-alarm-text', '--risk-alarm-border'],
+                  crit: ['严重报警', '--risk-crit-bg', '--risk-crit-solid-text', '--risk-crit-main'] };
+    const m = map[risk];
+    const solid = risk === 'crit';
+    return `<span style="display:inline-block;padding:0 8px;height:18px;line-height:18px;border-radius:2px;` +
+      `font-size:${11}px;font-weight:600;` +
+      `background:var(${solid ? m[3] : m[1]});color:var(${solid ? m[2] : m[2]});` +
+      `border:1px solid var(${solid ? 'transparent' : m[3]})">${m[0]}</span>`;
+  }
+
   async function loadData() {
     try {
       const response = await fetch(`/api/history_data?${getQueryString()}`);
@@ -205,70 +340,41 @@
       if (!response.ok) throw new Error(`请求失败：${response.status}`);
       const dataRows = await response.json();
       if (dataRows.length === 0) {
-        showHistoryMessage('暂无历史数据。');
+        showHistoryMessage('所选时间范围内没有记录。');
         if (historyChart) historyChart.clear();
         return;
       }
 
-      const sampleTimes = dataRows.map(dataRow => dataRow.ts);
-      const strainValues = dataRows.map(dataRow => parseFloat(dataRow.value));
-      const averageValue = strainValues.reduce((total, value) => total + value, 0) / strainValues.length;
+      const sampleTimes = dataRows.map((r) => r.ts);
+      const strainValues = dataRows.map((r) => parseFloat(r.value));
+      const averageValue = strainValues.reduce((a, b) => a + b, 0) / strainValues.length;
       const maximumValue = Math.max(...strainValues);
       const minimumValue = Math.min(...strainValues);
-      const overThresholdCount = strainValues.filter(value => value > currentThreshold).length;
+      const overThresholdCount = strainValues.filter((v) => v > currentThreshold).length;
 
       document.getElementById('avgAll').textContent = averageValue.toFixed(2);
       document.getElementById('maxAll').textContent = maximumValue.toFixed(2);
       document.getElementById('minAll').textContent = minimumValue.toFixed(2);
-      document.getElementById('overCount').textContent = overThresholdCount;
+      const overEl = document.getElementById('overCount');
+      overEl.textContent = overThresholdCount;
 
       if (strainValues.length >= 2) {
-        const midpoint = Math.floor(strainValues.length / 2);
-        const frontAverage = strainValues.slice(0, midpoint).reduce((total, value) => total + value, 0) / midpoint;
-        const backAverage = strainValues.slice(midpoint).reduce((total, value) => total + value, 0) / (strainValues.length - midpoint);
-        const averageDifference = backAverage - frontAverage;
-        document.getElementById('compare').textContent =
-          (averageDifference > 0.5 ? '↑ +' : averageDifference < -0.5 ? '↓ ' : '≈ ') + averageDifference.toFixed(2);
+        const mid = Math.floor(strainValues.length / 2);
+        const front = strainValues.slice(0, mid).reduce((a, b) => a + b, 0) / mid;
+        const back = strainValues.slice(mid).reduce((a, b) => a + b, 0) / (strainValues.length - mid);
+        const diff = back - front;
+        /* 4.1.1：方向符号 + 数值，一律 --text-tertiary，不用红绿（涨落不等于好坏） */
+        const dir = diff > 0.005 ? '▲ ' : (diff < -0.005 ? '▼ ' : '— ');
+        document.getElementById('compare').textContent = dir + (diff >= 0 ? '+' : '−') + Math.abs(diff).toFixed(2) + '%';
       }
 
+      const T = window.BGCharts.tokens();
       if (!historyChart) historyChart = echarts.init(document.getElementById('histChart'));
-      historyChart.setOption({
-        grid: { left: 48, right: 18, top: 30, bottom: 44 },
-        /* 浅色可读配色：轴 #d5dae0 / 标签 #6b7280 / 分割线 #eef1f4 */
-        xAxis: { type: 'category', data: sampleTimes, axisLabel: { color: '#6b7280', fontSize: 10 },
-          axisLine: { lineStyle: { color: '#d5dae0' } }, axisTick: { show: false } },
-        yAxis: { type: 'value', scale: true, axisLabel: { color: '#6b7280', fontSize: 10 },
-          axisLine: { show: false }, axisTick: { show: false },
-          splitLine: { lineStyle: { color: '#eef1f4' } } },
-        tooltip: { trigger: 'axis', backgroundColor: 'rgba(255, 255, 255, .98)', borderColor: '#e5e8eb',
-          borderWidth: 1, textStyle: { color: '#1f2937', fontSize: 12 },
-          axisPointer: { lineStyle: { color: '#16a34a' } } },
-        dataZoom: [
-          { type: 'inside', start: 0, end: 100 },
-          { type: 'slider', height: 14, bottom: 8, borderColor: '#e5e8eb',
-            backgroundColor: '#f8fafb', fillerColor: 'rgba(22, 163, 74, .12)',
-            handleStyle: { color: '#16a34a' }, textStyle: { color: '#6b7280', fontSize: 10 },
-            /* ECharts 的 selectedDataBackground 默认是蓝灰（#8fb0f7），滑块选中段会漏出蓝色 */
-            selectedDataBackground: { lineStyle: { color: 'rgba(22, 163, 74, .65)' }, areaStyle: { color: 'rgba(22, 163, 74, .18)' } } }
-        ],
-        series: [{
-          name: '应变指标', type: 'line', data: strainValues, smooth: true, showSymbol: false,
-          lineStyle: { color: '#16a34a', width: 2 },
-          itemStyle: { color: '#16a34a' },
-          areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: 'rgba(22, 163, 74, .26)' },
-            { offset: 1, color: 'rgba(22, 163, 74, 0)' }]) },
-          markLine: {
-            symbol: 'none', silent: true,
-            data: [{ yAxis: currentThreshold, name: '阈值' }],
-            lineStyle: { color: '#be123c', type: 'dashed', width: 1.5 },
-            label: { color: '#be123c', formatter: '阈值 ' + currentThreshold, position: 'insideEndTop', fontSize: 10 }
-          }
-        }]
-      });
+      historyChart.setOption(chartOption(T, sampleTimes, strainValues), { notMerge: true });
+      lastSeries = { times: sampleTimes, values: strainValues };
     } catch (error) {
       console.error('读取历史数据失败', error);
-      showHistoryMessage('历史数据读取失败，请检查数据库和服务状态。');
+      showHistoryMessage('历史数据读取失败，请检查数据库和服务状态。', true);
     }
   }
 
@@ -280,7 +386,7 @@
       const s = await response.json();
       currentThreshold = s.threshold;
       const label = document.getElementById('overCountLabel');
-      if (label) label.textContent = `>${currentThreshold}`;
+      if (label) label.textContent = currentThreshold;
       if (currentTab === 'data') loadData();
     } catch (e) { console.error('读取阈值失败', e); }
   }
@@ -288,9 +394,16 @@
   switchTab('alarm');
   loadThreshold();
   window.addEventListener('resize', () => { if (historyChart) historyChart.resize(); });
+  /* 主题切换：重建配置（不销毁实例），保留缩放位置 */
+  if (window.BGCharts) {
+    window.BGCharts.onThemeChange(function (T) {
+      if (!historyChart || !lastSeries) return;
+      historyChart.setOption(chartOption(T, lastSeries.times, lastSeries.values), { notMerge: true });
+    });
+  }
 </script>
 
-{# 共享骨架行为：桌面收起/展开 + localStorage 记忆 + 移动端抽屉 #}
+{# 共享骨架行为：桌面收起/展开 + localStorage 记忆 + 移动端抽屉 + 主题切换 #}
 {{ shell.shell_scripts() }}
 
 </body>

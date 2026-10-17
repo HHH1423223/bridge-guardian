@@ -1,0 +1,217 @@
+/* ============================================================================
+   base.css —— 全局基础层
+   ----------------------------------------------------------------------------
+   职责（规范 8.3）：本地字体声明、全局重置、body 字体与颜色、焦点环、滚动条、
+   文本选区、减弱动效全局降级、打印基础规则。
+   这里不写任何组件外观：组件一律在 components.css。
+   ========================================================================== */
+
+/* ============================================================================
+   2.2.1 字体：Inter（拉丁与数字）+ 系统中文字体，本地打包，不引任何 CDN。
+   ----------------------------------------------------------------------------
+   ⚠️ 离线红线（D5）：Inter 的 woff2 必须放在 static/fonts/ 下由本文件引用。
+      当前仓库尚未放入字体二进制（构建环境无外网，无法下载）。
+      把 Inter-{400,500,600,700}.woff2 放到 static/fonts/ 后，取消下面整段注释即可；
+      --font-ui / --font-data 已把 "Inter" 排在首位，系统装过 Inter 时也会优先生效。
+      只打包拉丁子集：U+0000-00FF（含 ° ± ×）、U+0391-03C9（含 μ）、
+      U+2000-206F、U+2070-209F、U+2100-214F（含 ℃）、U+2212（减号）。
+      中文字符自动落到后面的系统中文字体，因此中文不打包。
+   ----------------------------------------------------------------------------
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0391-03C9, U+2000-206F, U+2070-209F, U+2100-214F, U+2212;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0391-03C9, U+2000-206F, U+2070-209F, U+2100-214F, U+2212;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0391-03C9, U+2000-206F, U+2070-209F, U+2100-214F, U+2212;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0391-03C9, U+2000-206F, U+2070-209F, U+2100-214F, U+2212;
+}
+   ========================================================================== */
+
+/* ---------------- 2.1.1 / 2.1.8 页面底色随主题；表单控件跟随 color-scheme ---------------- */
+:root { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+
+/* ---------------- 重置 ---------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-canvas);
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: var(--fs-md);
+  line-height: var(--lh-md);
+  /* 只关闭字重合成：缺字重时浏览器会用描边模拟粗体，把中文笔画糊成一片（2.2.3 规则 4） */
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+/* 标题与数值用 primary，正文用 secondary（2.1.5） */
+h1, h2, h3, h4 { color: var(--text-primary); font-weight: var(--fw-semibold); }
+b, strong { font-weight: var(--fw-semibold); color: var(--text-primary); }
+small { font-size: var(--fs-2xs); line-height: var(--lh-2xs); }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+img, svg, canvas { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+table { border-collapse: collapse; border-spacing: 0; width: 100%; }
+[hidden] { display: none !important; }
+
+/* ---------------- 2.2.5 数字排版：等宽数字 + 表格数字列右对齐 ---------------- */
+.num,
+.bg-num { font-family: var(--font-data); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1, "case" 1; }
+
+/* 负号统一用减号 U+2212；连字符偏短偏高，会破坏对齐（2.2.5 规则 3） */
+
+/* ---------------- 2.1.3 规则 5 焦点环 ---------------- */
+/* 只有键盘导航显示；鼠标点击不显示。外环距元素外沿 2px，圆角跟随元素。 */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ---------------- 文本选区 ---------------- */
+::selection { background: var(--accent-soft); color: var(--text-primary); }
+
+/* ---------------- 滚动条（中性灰，不用香槟金） ---------------- */
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  background-clip: content-box;
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-disabled); background-clip: content-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* ---------------- 通用可见性工具 ---------------- */
+.bg-visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ============================================================================
+   2.6.5 减弱动效：全局把过渡与动画降到 0。
+   信息不因动效关闭而丢失 —— 各组件在 components.css 里给出静态替代表现
+   （脉冲→静态描边环，涟漪→静止环，新行高亮→常驻底色）。
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+   5.5.3 打印：强制浅色 + 去底色 + 表头重复 + 行不跨页。
+   打印时无法切换 data-theme，所以直接把浅色 token 重声明一遍（只挑影响可读性的）。
+   ========================================================================== */
+@media print {
+  :root,
+  [data-theme="dark"] {
+    color-scheme: light;
+    --bg-canvas: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-subtle: #ffffff;
+    --bg-sunken: #ffffff;
+    --bg-raised: #ffffff;
+    --bg-hover: transparent;
+    --bg-selected: transparent;
+    --border-subtle: #d5d8dd;
+    --border-default: #c8ccd2;
+    --border-strong: #a4a9b0;
+    --text-primary: #000000;
+    --text-secondary: #33363c;
+    --text-tertiary: #4b515a;
+    --text-disabled: #6b717a;
+    --chart-grid: #e6e8eb;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --hud-bg: #ffffff;
+  }
+
+  body { background: #ffffff; }
+
+  /* 隐藏导航与操作入口，只留内容 */
+  .sh-side,
+  .sh-topbar-side,
+  .sh-scrim,
+  .filters .btn,
+  .his-tabs button:not(.active),
+  .pa-actions,
+  .pg-foot a,
+  .dv-foot a { display: none !important; }
+
+  .sh-layout { display: block; }
+  .sh-content { padding: 0 !important; }
+  .sh-page { max-width: none !important; }
+
+  /* 面板去掉外框与阴影，靠留白分隔 */
+  .card {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    break-inside: avoid;
+  }
+
+  /* 表格：表头每页重复，行不跨页断开，去底色 */
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  thead th { background: transparent !important; }
+  tbody td { background: transparent !important; }
+
+  /* 风险徽标改为只有描边（打印不必填充色块）；左侧色条保留 */
+  .bg-badge { background: transparent !important; border: 1px solid currentColor !important; }
+  .bg-stripe { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+  /* 图表按线型区分，黑白可读 */
+  .bg-chart-host { break-inside: avoid; }
+}

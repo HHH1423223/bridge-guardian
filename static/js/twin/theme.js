@@ -36,32 +36,78 @@ export const THEME_NAMES = ['light', 'dark'];
 export const DEFAULT_THEME = 'light';
 
 /**
- * 风险等级 → 主题色（**浅色专版**，与 templates/dashboard.html 的 severity CSS
- * 变量、app.css 的严重度色一致）。白底 #ffffff 上的 WCAG 对比度（实算，见报告）：
- *   normal  #15803d  5.01:1   warn  #b45309  5.02:1   alarm #c2410c  5.18:1
- *   crit    #be123c  6.28:1   offline #6b7280 4.83:1
- * 全部 ≥4.5:1（正文级），也远高于 3:1（图形/UI 组件级）—— 1px 的线框描边、
- * 半透明光环、8px 的测点球在白底上都读得出来。
+ * 风险等级 → 主题色（浅色专版）。
+ * 规范 7.2 / 2.1.4：这四个值必须与 CSS 变量 --risk-*-main 完全一致，
+ * 运行时由 syncFromCss() 从根元素计算样式覆盖；这里的字面量只是读不到 CSS 时的兜底。
  */
 export const RISK_COLORS_LIGHT = {
-  normal: '#15803d',
-  warn: '#b45309',
-  alarm: '#c2410c',
-  crit: '#be123c',
-  offline: '#6b7280',
+  normal: '#2f855a',
+  warn: '#b7791f',
+  alarm: '#c25a16',
+  crit: '#c8353b',
+  offline: '#8a9099',
 };
 
 /**
- * 深色专版（P1 既有观感，保持不变）。近黑底上必须用**亮**色，
- * 否则和浅色一样等于消失。
+ * 深色专版（规范 7.2）。**不再是香槟金**：深色主题的正常色原为 #e0b97b，
+ * 与浅色主题强调色冲突是同一个问题在 3D 里的翻版（0.3 第 1 条）。
  */
 export const RISK_COLORS_DARK = {
-  normal: '#e0b97b',
-  warn: '#fbbf24',
-  alarm: '#fb923c',
-  crit: '#f43f5e',
-  offline: '#77716a',
+  normal: '#4cb782',
+  warn: '#e0a82e',
+  alarm: '#e87a3a',
+  crit: '#ef5a5f',
+  offline: '#6b7079',
 };
+
+/** #rrggbb → 0xrrggbb（读 CSS 变量用） */
+function hexToInt(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || '').trim());
+  return m ? parseInt(m[1], 16) : null;
+}
+
+/**
+ * 规范 7.2：CSS token 是唯一真相。
+ * 在挂载时以及每次主题切换后，从根元素计算样式读取本表列出的变量，
+ * 覆盖 theme.js 里的兜底字面量（对象是原地修改的，所以调用方不需要改签名）。
+ * 读不到（例如在没有 DOM 的自测环境里）就保持字面量不动。
+ */
+export function syncFromCss(doc) {
+  const d = doc || (typeof document !== 'undefined' ? document : null);
+  if (!d || !d.documentElement || !d.defaultView) return false;
+  let cs;
+  try { cs = d.defaultView.getComputedStyle(d.documentElement); } catch (e) { return false; }
+  if (!cs) return false;
+  const themed = d.documentElement.getAttribute('data-theme') === 'dark';
+  const read = (name) => {
+    try { return String(cs.getPropertyValue(name) || '').trim(); } catch (e) { return ''; }
+  };
+  const riskTarget = themed ? RISK_COLORS_DARK : RISK_COLORS_LIGHT;
+  const map = {
+    normal: '--risk-normal-main',
+    warn: '--risk-warn-main',
+    alarm: '--risk-alarm-main',
+    crit: '--risk-crit-main',
+    offline: '--trust-unknown-main',
+  };
+  Object.keys(map).forEach((key) => {
+    const v = read(map[key]);
+    if (/^#[0-9a-f]{6}$/i.test(v)) riskTarget[key] = v.toLowerCase();
+  });
+  const t = themed ? THEME_DARK : THEME_LIGHT;
+  const clearHex = read('--twin-clear');
+  const clearInt = hexToInt(clearHex);
+  if (clearInt !== null) {
+    /* 雾色必须等于清屏色（7.2）：否则画布远端会出现一条可见的地平线色带 */
+    t.clear = clearInt;
+    t.fog.color = clearInt;
+  }
+  const wireHex = read('--text-secondary');
+  if (/^#[0-9a-f]{6}$/i.test(wireHex)) t.wire.color = wireHex.toLowerCase();
+  const mutedHex = read('--text-tertiary');
+  if (/^#[0-9a-f]{6}$/i.test(mutedHex)) t._muted = mutedHex.toLowerCase();
+  return true;
+}
 
 /* ------------------------------------------------- WCAG 对比度（校验用） */
 /**
@@ -94,14 +140,14 @@ export function contrastRatio(hexA, hexB) {
  */
 const THEME_LIGHT = {
   name: 'light',
-  /* 渲染器 clearColor。⚠ 冻结值：Lead 已用 CSS 变量 --twin-clear:#f2f5f7 把页面
-     底色对齐到它，画布与页面必须同值，否则桥体边缘会出现可见色差接缝。 */
-  clear: 0xf2f5f7,
+  /* 渲染器 clearColor。规范 7.2：必须等于 CSS 变量 --twin-clear（= --bg-canvas），
+     否则画布与页面底色之间会出现可见的色差接缝。运行时由 syncFromCss() 覆盖。 */
+  clear: 0xf4f5f7,
   /* ACES 色调映射曝光。浅色场景不靠加大曝光提亮（会把高光顶到纯白），
      靠环境贴图与反照率本身；所以保持 1.0。 */
   exposure: 1.0,
-  /* 雾色浅灰白：远景收到 224 亮度而不是近黑，仍与天空(242)有 18 级差 → 有地平线。 */
-  fog: { color: 0xdfe6ea, density: 0.00016, mistOffDensityScale: 1.75 },
+  /* 雾色 == 清屏色（7.2）：远景自然溶解进页面背景，3D 场景与页面没有边界。 */
+  fog: { color: 0xf4f5f7, density: 0.00016, mistOffDensityScale: 1.75 },
   lights: {
     /* 半球光：天空淡蓝白 / 地面中灰。ground 不能太暗，否则背光面会掉成剪影 */
     hemi: { sky: 0xe8f0f6, ground: 0x9aa2a8, intensity: 0.70 },
@@ -174,58 +220,68 @@ const THEME_LIGHT = {
 };
 
 /**
- * 深色主题：**与 P1 既有观感逐项对齐**（近黑峡谷 + 香槟金桥体 + 暖色天光）。
- * 这里的数字就是从改造前的 scene.js / canyon.js / materials.js 抄下来的原值，
- * 目的是「切回深色 = 回到改造前」，不是重新设计。
+ * 深色主题：规范 7.3 / 7.4 的「中性冷灰」配方。
+ * 原先是 P1 的「黑曜石 + 香槟金」——香槟金轮廓光、金色地平线亮带、暖米色玻璃，
+ * 会让整座桥呈现黑金质感，属于 6.3 第 10 条禁止的装饰性配色。现在全部改为中性灰，
+ * 只保留「帮助轮廓从深色背景里分离」这一功能。
  */
 const THEME_DARK = {
   name: 'dark',
-  clear: 0x070708,                    // = 原 renderer.setClearColor(0x070708, 1)
-  exposure: 1.0,                      // = 原 renderer.toneMappingExposure
-  fog: { color: 0x0e0d0c, density: 0.00019, mistOffDensityScale: 1.75 },
+  /* 规范 7.2：等于 --bg-canvas 深色取值 #0B0C0E */
+  clear: 0x0b0c0e,
+  exposure: 1.0,
+  fog: { color: 0x0b0c0e, density: 0.00019, mistOffDensityScale: 1.75 },
   lights: {
-    hemi: { sky: 0xb5b9bd, ground: 0x121110, intensity: 0.55 },
-    key: { color: 0xf5f2ec, intensity: 1.12, pos: [-900, 1500, -1200] },
-    rim: { color: 0xe0b97b, intensity: 0.75, pos: [1200, 400, 900] },
-    amb: { color: 0x1e1e20, intensity: 0.30 },
+    hemi: { sky: 0xb4bac2, ground: 0x101113, intensity: 0.55 },
+    key: { color: 0xf2f4f7, intensity: 1.12, pos: [-900, 1500, -1200] },
+    /* 轮廓光：原香槟金 #e0b97b / 0.75 → 中性冷灰 / 0.45（只做轮廓分离，不做氛围） */
+    rim: { color: 0xc8ced6, intensity: 0.45, pos: [1200, 400, 900] },
+    amb: { color: 0x1c1e22, intensity: 0.30 },
   },
   env: {
-    /* 原 buildEnvironment() 的五个渐变停点，一字不改 */
+    /* 规范 7.3.3：地平线的金色亮带 #7a5f3c → 中性灰 #4E545C。
+       这是 6.3 第 2 条「禁止渐变」的唯一例外：环境贴图渐变是渲染物理需要，
+       用户看不到渐变本身，只看到它在金属材质上的反射。 */
     stops: [
-      [0.00, '#060608'],
-      [0.38, '#161210'],
-      [0.50, '#7a5f3c'],
-      [0.57, '#150f08'],
-      [1.00, '#040405'],
+      [0.00, '#08090b'],
+      [0.38, '#14161a'],
+      [0.50, '#4e545c'],
+      [0.57, '#121418'],
+      [1.00, '#060708'],
     ],
     sun: {
       x: 150, y: 84, r: 120,
       stops: [
-        [0.00, 'rgba(255,250,242,0.62)'],
-        [0.34, 'rgba(210,180,130,0.18)'],
+        [0.00, 'rgba(242,244,247,0.55)'],
+        [0.34, 'rgba(180,186,194,0.14)'],
         [1.00, 'rgba(0,0,0,0)'],
       ],
     },
   },
   terrain: {
-    cLow: '#232322', cMid: '#33322f', cHigh: '#42403b', cTop: '#514e47', cWarm: '#5c564a',
+    /* 规范 7.4.3：地形渐变去暖调。cWarm 保留极轻微暖调（模拟向阳岩壁），
+       饱和度降到「人眼仅能察觉它不是纯灰」的程度。 */
+    cLow: '#1e2023', cMid: '#2a2d31', cHigh: '#373a3f', cTop: '#44484e', cWarm: '#4c4b48',
     nearWaterDarken: 0.35,
     metalness: 0.16, roughness: 0.97, flatShading: true, envIntensity: 1.0,
   },
   water: {
-    color: 0x1b1810, metalness: 0.50, roughness: 0.28,
-    emissive: 0x0f0c06, opacity: 0.92, envIntensity: 1.0,
+    color: 0x0f1114, metalness: 0.50, roughness: 0.28,
+    emissive: 0x16181b, opacity: 0.92, envIntensity: 1.0,
   },
   mist: {
-    color: 0xcfc3ab, opacityScale: 1.0, blending: 'additive',
+    /* 规范 7.3.4：暖米色 + 叠加混合 → 中性灰 + 普通混合。
+       叠加混合会让雾层在深色背景上发光，属于 6.3 第 4 条禁止的发光效果。 */
+    color: 0x9aa1a9, opacityScale: 1.0, blending: 'normal',
     emissive: 0x000000, emissiveIntensity: 1.0,
   },
   envIntensity: {
-    steel: 0.9, cable: 1.0, deckPlate: 0.9, clamp: 0.8, concrete: 0.15, glass: 1.2,
+    steel: 0.9, cable: 1.0, deckPlate: 0.9, clamp: 0.8, concrete: 0.15, glass: 0.8,
   },
   wire: {
-    color: '#e0b97b', opacity: 0.62, transparent: true,
-    blending: 'additive', depthWrite: false, depthTest: true, renderOrder: 2,
+    /* 规范 7.4.4：线框不随风险变色，用 --text-secondary（深色主题 #B4B8BF） */
+    color: '#b4b8bf', opacity: 0.9, transparent: false,
+    blending: 'normal', depthWrite: false, depthTest: true, renderOrder: 2,
   },
   tint: { lighten: 1.45, darken: 0.55 },
 };
@@ -246,55 +302,58 @@ const THEMES = { light: THEME_LIGHT, dark: THEME_DARK };
 export const MATERIAL_THEMES = {
   light: {
     steel: { color: '#5b646c', metalness: 0.18, roughness: 0.48, emissiveScale: 0.05 },
-    edge: { opacity: 0.90 },
+    edge: { color: '#4d555c', opacity: 0.90 },
     deckPlate: { color: '#727980', metalness: 0.22, roughness: 0.55, emissiveScale: 0.05 },
     road: { color: '#44474a', metalness: 0.05, roughness: 0.95 },
     laneMark: { color: '#f7f7f4', opacity: 0.90 },
-    laneGlow: { opacity: 0.45 },
-    railGlow: { opacity: 0.90 },
+    /* 7.4.4：车道/栏杆「发光条」改为非发光的中性材质（浅色 #C8CCD2）。
+       tintRole 为 none 的情况下这里给的就是最终色；带 tintRole 的材质由风险色派生，
+       是否让它随风险变色由 scene.js 的构件清单决定。 */
+    laneGlow: { color: '#c8ccd2', opacity: 0.45 },
+    railGlow: { color: '#c8ccd2', opacity: 0.90 },
     cable: { color: '#7e878e', metalness: 0.42, roughness: 0.30, emissiveScale: 0.05 },
-    /* 主缆流光：浅底上加法混合会把像素顶到纯白 = 看不见 → 改普通混合（不透明化） */
-    cableFlow: { opacity: 0.85, blending: 'normal', depthWrite: false },
+    /* 主缆流光：规范 7.4.4 要求删除（流动光带是典型赛博装饰，且不对应任何物理量） */
+    cableFlow: { opacity: 0.0, blending: 'normal', depthWrite: false, visible: false },
     clamp: { color: '#5a6067', metalness: 0.70, roughness: 0.35, emissiveScale: 0.05 },
     concrete: { color: '#878d91', metalness: 0.02, roughness: 0.90 },
-    concreteEdge: { opacity: 0.60 },
-    /* 玻璃：反照率降一档、粗糙度略升（高光摊开）、envMapIntensity 由 descriptor 给 0.55 */
-    glass: { color: '#cdd8de', metalness: 0.0, roughness: 0.14, opacity: 0.34, emissiveScale: 0.05, envMapIntensity: 0.55 },
-    glassEdge: { opacity: 0.65 },
+    concreteEdge: { color: '#737a7d', opacity: 0.60 },
+    /* 玻璃（7.4.2）：#cdd8de → #D5DAE0、不透明度 0.34 → 0.30（去掉残留的蓝偏） */
+    glass: { color: '#d5dae0', metalness: 0.0, roughness: 0.14, opacity: 0.30, emissiveScale: 0.05, envMapIntensity: 0.55 },
+    glassEdge: { color: '#b5babe', opacity: 0.65 },
     sensor: { opacity: 0.98 },
-    /* 测点光环：加法混合在白底上 = 消失（白 + 任何色 ≤ 白）→ 改普通混合的深色环 */
-    sensorHalo: { opacity: 0.22, blending: 'normal', depthWrite: false },
+    /* 测点光晕：两套主题都用普通混合，不透明度 0.20（7.5.1） */
+    sensorHalo: { opacity: 0.20, blending: 'normal', depthWrite: false },
     rock: { color: '#8a8f92', metalness: 0.04, roughness: 0.98, flatShading: true },
-    rockEdge: { opacity: 0.12 },
+    rockEdge: { color: '#757a7c', opacity: 0.12 },
     water: { color: '#84929b', metalness: 0.30, roughness: 0.15, emissive: '#2b3a42', opacity: 0.94, envMapIntensity: 1.05 },
     mist: { color: '#ffffff', opacity: 0.06, blending: 'normal', emissive: '#ffffff', emissiveIntensity: 0.5 },
-    beacon: { opacity: 1.0 },
+    /* 塔顶信号灯：中性，不发光不闪烁（红色会与严重报警混淆，7.4.4） */
+    beacon: { color: '#6b717a', opacity: 1.0 },
   },
   dark: {
-    /* 全部为 P1 原值（含 applyPalette 覆盖后的**有效**发光系数 0.10） */
-    steel: { color: '#b9b7b4', metalness: 0.25, roughness: 0.42, emissiveScale: 0.10 },
-    edge: { opacity: 0.90 },
-    deckPlate: { color: '#757068', metalness: 0.30, roughness: 0.50, emissiveScale: 0.10 },
-    road: { color: '#10100f', metalness: 0.25, roughness: 0.90 },
+    /* 规范 7.4.3：结构材质全部去暖调，改为中性冷灰；
+       桥塔明度明显降一级，避免它成为全场最亮的物体（测点才应该是）。 */
+    steel: { color: '#a9aeb4', metalness: 0.25, roughness: 0.42, emissiveScale: 0.10 },
+    edge: { color: '#909599', opacity: 0.90 },
+    deckPlate: { color: '#6a6f75', metalness: 0.30, roughness: 0.50, emissiveScale: 0.10 },
+    road: { color: '#16181b', metalness: 0.25, roughness: 0.90 },
     laneMark: { color: '#f0efee', opacity: 0.85 },
-    laneGlow: { opacity: 0.35 },
-    railGlow: { opacity: 0.90 },
-    cable: { color: '#d4d2d0', metalness: 0.35, roughness: 0.30, emissiveScale: 0.10 },
-    cableFlow: { opacity: 0.90, blending: 'additive', depthWrite: false },
-    clamp: { color: '#3b3835', metalness: 0.90, roughness: 0.30, emissiveScale: 0.10 },
-    concrete: { color: '#c3c1bf', metalness: 0.02, roughness: 0.95 },
-    concreteEdge: { opacity: 0.60 },
-    /* 构造参数写的是 emissive 0.25，但 createMaterials 末尾的 applyPalette 会把它
-       重算成 accent×0.10（userData.emissiveScale 缺省 0.10）—— 基线**有效值**是 0.10。 */
-    glass: { color: '#ebdcc1', metalness: 0.0, roughness: 0.08, opacity: 0.28, emissiveScale: 0.10, envMapIntensity: 1.2 },
-    glassEdge: { opacity: 0.55 },
+    laneGlow: { color: '#4e525a', opacity: 0.35 },
+    railGlow: { color: '#4e525a', opacity: 0.90 },
+    cable: { color: '#c4c9cf', metalness: 0.35, roughness: 0.30, emissiveScale: 0.10 },
+    cableFlow: { opacity: 0.0, blending: 'normal', depthWrite: false, visible: false },
+    clamp: { color: '#3a3d42', metalness: 0.90, roughness: 0.30, emissiveScale: 0.10 },
+    concrete: { color: '#9da2a8', metalness: 0.02, roughness: 0.95 },
+    concreteEdge: { color: '#868b90', opacity: 0.60 },
+    glass: { color: '#b8c0c8', metalness: 0.0, roughness: 0.08, opacity: 0.28, emissiveScale: 0.10, envMapIntensity: 0.8 },
+    glassEdge: { color: '#9ca4ab', opacity: 0.55 },
     sensor: { opacity: 0.95 },
-    sensorHalo: { opacity: 0.18, blending: 'additive', depthWrite: false },
-    rock: { color: '#393632', metalness: 0.12, roughness: 1.00, flatShading: true },
-    rockEdge: { opacity: 0.10 },
-    water: { color: '#111110', metalness: 0.90, roughness: 0.12, emissive: '#201e1c', opacity: 0.95, envMapIntensity: 1.0 },
-    mist: { color: '#ebdcc1', opacity: 0.055, blending: 'additive', emissive: '#000000', emissiveIntensity: 1.0 },
-    beacon: { opacity: 1.0 },
+    sensorHalo: { opacity: 0.20, blending: 'normal', depthWrite: false },
+    rock: { color: '#2c2f33', metalness: 0.12, roughness: 1.00, flatShading: true },
+    rockEdge: { color: '#25282b', opacity: 0.10 },
+    water: { color: '#0f1114', metalness: 0.90, roughness: 0.12, emissive: '#16181b', opacity: 0.95, envMapIntensity: 1.0 },
+    mist: { color: '#9aa1a9', opacity: 0.05, blending: 'normal', emissive: '#000000', emissiveIntensity: 1.0 },
+    beacon: { color: '#80858d', opacity: 1.0 },
   },
 };
 
@@ -405,6 +464,9 @@ export function applyRecipeToMaterial(material, name, THREE) {
   if (r.depthWrite !== undefined) material.depthWrite = r.depthWrite;
   if (r.depthTest !== undefined) material.depthTest = r.depthTest;
   if (r.side !== undefined) material.side = r.side;
+  /* visible：规范 7.4.4 要求直接删除主缆流光（流动光带是装饰），
+     保留几何但整块不参与渲染，几何与调用方都不需要改。 */
+  if (r.visible !== undefined) material.visible = r.visible;
   if (r.blending !== undefined && THREE) {
     const b = r.blending === 'additive' ? THREE.AdditiveBlending : THREE.NormalBlending;
     if (material.blending !== b) { material.blending = b; recompile = true; }
@@ -611,13 +673,17 @@ function applyRecipesInScene(scene, name, THREE) {
 export function applySceneTheme(opts) {
   const o = opts || {};
   const THREE = o.THREE, scene = o.scene, renderer = o.renderer;
+  /* 规范 7.2：CSS token 是唯一真相 —— 应用主题前先从根元素计算样式同步一次，
+     让画布底色、雾色、风险五色、线框色与页面 CSS 完全一致。
+     读不到 DOM（自测环境）时保持本文件的字面量兜底。 */
+  if (o.syncCss !== false) syncFromCss(o.doc);
   const t = getTheme(o.name);
   if (!scene) return null;
   if (!scene.userData) scene.userData = {};
 
   const report = { name: t.name, lights: 4, env: false, fog: null, world: 0, materials: 0, disposedLights: 0 };
 
-  // ① 底色与曝光：画布底色必须等于页面 CSS 变量 --twin-clear（Lead 冻结 0xf2f5f7）
+  // ① 底色与曝光：画布底色必须等于页面 CSS 变量 --twin-clear（规范 7.2）
   if (renderer) {
     renderer.setClearColor(t.clear, 1);
     if ('toneMappingExposure' in renderer) renderer.toneMappingExposure = t.exposure;

@@ -63,36 +63,39 @@ export function createMaterials(THREE, themeName) {
   }
 
   /* ---- 结构钢：主桁杆件（浅色主题 = 深灰对比主体；深色主题 = 亮灰金属） ---- */
-  const steel = tint(make('steel', new MeshStandardMaterial({})), 'emissive');
+  const steel = make('steel', new MeshStandardMaterial({}));
 
   /* ---- 桁架描边（数字孪生高亮骨架，随风险等级变色） ---- */
-  const edge = tint(make('edge', new MeshBasicMaterial({ transparent: true })), 'color');
+  const edge = make('edge', new MeshBasicMaterial({ transparent: true }));
 
   /* ---- 桥面板 ---- */
-  const deckPlate = tint(make('deckPlate', new MeshStandardMaterial({})), 'emissive');
+  const deckPlate = make('deckPlate', new MeshStandardMaterial({}));
 
   /* ---- 行车道 ---- */
   const road = make('road', new MeshStandardMaterial({}));
   const laneMark = make('laneMark', new MeshBasicMaterial({ transparent: true }));
-  const laneGlow = tint(make('laneGlow', new MeshBasicMaterial({ transparent: true })), 'color');
-  const railGlow = tint(make('railGlow', new MeshBasicMaterial({ transparent: true })), 'color');
+  /* 规范 7.4.4：车道与栏杆的「发光条」改为非发光的中性材质，**不再随风险变等级变色**。
+     原先它们是 tint(..., 'color')，正常态整条桥都带着正常色的描边与光带，
+     违反原则一（颜色只表达风险）。现在它们只是桥面标线：几何保留，颜色中性。 */
+  const laneGlow = make('laneGlow', new MeshBasicMaterial({ transparent: true }));
+  const railGlow = make('railGlow', new MeshBasicMaterial({ transparent: true }));
 
   /* ---- 主缆 / 吊索：金属索体（吊索实例颜色按相对荷载由 bridge.applyRisk 着色） ---- */
-  const cable = tint(make('cable', new MeshStandardMaterial({})), 'emissive');
+  const cable = make('cable', new MeshStandardMaterial({}));
 
-  /* ---- 缆索能量流光（叠加在同路径上的发光管） ---- */
-  /* ⚠ 混合模式随主题变：深色 = AdditiveBlending（发光）；浅色 = NormalBlending。
-     白底上加法混合等于消失（dst + src 被钳到纯白），这是用户需求里的硬约束。 */
-  const cableFlow = tint(make('cableFlow', new MeshBasicMaterial({
-    transparent: true, depthWrite: false,
-  })), 'color');
+  /* ---- 缆索流光：规范 7.4.4 / 8.6 C4 已批准删除。
+     保留几何与材质（不删节点，避免 bridge.js 的引用失效），但材质 visible=false
+     且不再登记 tintRole —— 它不表达任何物理量，属于 6.3 第 7、11 条禁止的装饰。 ---- */
+  const cableFlow = make('cableFlow', new MeshBasicMaterial({
+    transparent: true, depthWrite: false, visible: false,
+  }));
 
   /* ---- 索夹 / 索鞍 ---- */
-  const clamp = tint(make('clamp', new MeshStandardMaterial({})), 'emissive');
+  const clamp = make('clamp', new MeshStandardMaterial({}));
 
   /* ---- 混凝土（桥塔 / 锚碇 / 承台）：浅色主题 = 中性灰大块体量 ---- */
   const concrete = make('concrete', new MeshStandardMaterial({}));
-  const concreteEdge = tint(make('concreteEdge', new MeshBasicMaterial({ transparent: true })), 'color');
+  const concreteEdge = make('concreteEdge', new MeshBasicMaterial({ transparent: true }));
 
   /* ---- 玻璃（观光厅 / 塔顶观星水吧 / 观光电梯） ----
      透光件：透明 + 双面；传输入射(transmission)=0，靠 opacity 叠加表现「玻璃感」。
@@ -101,7 +104,7 @@ export function createMaterials(THREE, themeName) {
   const glass = tint(make('glass', new MeshPhysicalMaterial({
     transparent: true, side: DoubleSide, transmission: 0,
   })), 'emissive');
-  const glassEdge = tint(make('glassEdge', new MeshBasicMaterial({ transparent: true })), 'color');
+  const glassEdge = make('glassEdge', new MeshBasicMaterial({ transparent: true }));
 
   /* ---- 测点标记（随风险等级变色，最醒目的元素） ---- */
   const sensor = tint(make('sensor', new MeshBasicMaterial({ transparent: true })), 'color');
@@ -112,7 +115,7 @@ export function createMaterials(THREE, themeName) {
 
   /* ---- 岩体（峡谷；实际地形顶点色由 canyon.js 直接写进几何属性） ---- */
   const rock = make('rock', new MeshStandardMaterial({ flatShading: true }));
-  const rockEdge = tint(make('rockEdge', new MeshBasicMaterial({ transparent: true })), 'color');
+  const rockEdge = make('rockEdge', new MeshBasicMaterial({ transparent: true }));
 
   /* ---- 水面（canyon.js 的 river 用主题 descriptor.water，这里是兼容保留的材质） ---- */
   const water = make('water', new MeshStandardMaterial({ transparent: true }));
@@ -120,8 +123,10 @@ export function createMaterials(THREE, themeName) {
   /* ---- 雾 / 云气（canyon.js 的 mist 用主题 descriptor.mist，这里是兼容保留） ---- */
   const mist = make('mist', new MeshStandardMaterial({ transparent: true, depthWrite: false, side: DoubleSide }));
 
-  /* ---- 通用发光点（塔顶航空障碍灯等） ---- */
-  const beacon = tint(make('beacon', new MeshBasicMaterial({ transparent: true })), 'color');
+  /* ---- 通用发光点（塔顶航空障碍灯等） ----
+     规范 7.4.4：若它代表真实航空障碍灯应为固定红色，但红色会与严重报警混淆，
+     所以改为中性色、不发光、不闪烁，只保留几何。 */
+  const beacon = make('beacon', new MeshBasicMaterial({ transparent: true }));
 
   const mats = {
     steel, edge, deckPlate, road, laneMark, laneGlow, railGlow,

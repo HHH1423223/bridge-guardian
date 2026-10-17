@@ -139,6 +139,14 @@ export function createTwinScene(opts) {
     return THEME_NAMES.indexOf(name) >= 0 ? name : DEFAULT_THEME;
   }
   function readStoredTheme() {
+    /* 规范 7.7 第 3 条：以根元素的 data-theme 为准（_shell.html 在 <head> 里同步写好，
+       避免先按浅色创建再切一次）。拿不到属性时才回落到 localStorage。 */
+    try {
+      if (typeof document !== 'undefined' && document.documentElement) {
+        const attr = document.documentElement.getAttribute('data-theme');
+        if (attr === 'light' || attr === 'dark') return attr;
+      }
+    } catch (e) { /* 继续走 localStorage */ }
     let v = null;
     try { v = window.localStorage ? window.localStorage.getItem(STORAGE_KEYS.theme) : null; } catch (e) { v = null; }
     return normalizeTheme(v);   // 非法值（脏值/null）一律回落默认主题
@@ -766,8 +774,10 @@ export function createTwinScene(opts) {
       try { matCtl.setPalette(key); } catch (e) { warn('setPalette 失败：' + ((e && e.message) || e)); }
     }
     applyWireTheme();                      // 线框用当前主题的风险色（浅色主题是深色描边）
-    // 测点环半径基准：风险越高越小（节奏越快，由 pulse 驱动）
-    const scale = key === 'offline' ? 0.55 : (key === 'crit' ? 0.85 : 1.0);
+    // 测点环半径基准：规范 7.5.2 的核心尺寸系数全部 1.0
+    // （离线 0.55 保留）。原实现让严重报警的测点变小到 0.85，反而让最危险的
+    // 测点在画面里更难被找到，已按规范改回 1.0。
+    const scale = key === 'offline' ? 0.55 : 1.0;
     hotspotGroups.forEach((g) => { g.userData.scaleBase = scale; });
     lastRiskKey = null;                    // 风险变了 → 下一帧必须重算吊索着色
   }
@@ -1038,33 +1048,50 @@ export function createTwinScene(opts) {
     state.paletteMoving = moving;
     if (camMoved || moving) lastInteractAt = now;   // 阻尼/换色期间不判空载
 
-    // ④ 测点脉冲（风险等级越高越快；离线冻结）—— 一律按真实 dt 推进，与帧率无关
+    // ④ 测点涟漪（风险等级越高越快；离线停止扩散）—— 一律按真实 dt 推进，与帧率无关
+    //    规范 7.5.2 的节奏：正常 4000ms / 预警 2400ms / 报警 1600ms / 严重 1000ms，
+    //    最大不透明度 0.20 / 0.35 / 0.45 / 0.55；离线不扩散。
+    //    严重报警由双环 50% 相位差表达 → 视觉上每 500ms 出一个新环（每秒 2 次），
+    //    低于 WCAG 2.3.1 的每秒 3 次上限；原 1.9 次/秒叠加后接近每秒 4 次，已超限。
     const isOffline = state.risk === 'offline';
-    const rate = isOffline ? 0
-      : (state.risk === 'crit' ? 1.9 : state.risk === 'alarm' ? 1.25 : state.risk === 'warn' ? 0.85 : 0.6);
-    if (!isOffline) state.pulse = (state.pulse + dt * rate) % 1;
+    const RIPPLE = {
+      normal: { rate: 0.25, opacity: 0.20 },   // 4000ms
+      warn:   { rate: 1 / 2.4, opacity: 0.35 }, // 2400ms
+      alarm:  { rate: 1 / 1.6, opacity: 0.45 }, // 1600ms
+      crit:   { rate: 1.0, opacity: 0.55 },     // 1000ms
+    };
+    const rip = RIPPLE[state.risk] || RIPPLE.normal;
+    if (!isOffline) state.pulse = (state.pulse + dt * rip.rate) % 1;
     hotspotGroups.forEach((g) => {
       const base = (g.userData.scaleBase || 1);
       const rings = g.userData.rings || [];
       rings.forEach((ring) => {
+        if (isOffline) {
+          // 离线时涟漪全部隐藏：残留的淡环会被误读为「还在工作」
+          ring.visible = false;
+          return;
+        }
+        ring.visible = true;
         const phase = (state.pulse + ring.userData.phase) % 1;
         ring.scale.setScalar((3.2 + phase * 12) * base);
-        ring.material.opacity = (1 - phase) * 0.5 * (isOffline ? 0.15 : 1);
+        ring.material.opacity = (1 - phase) * rip.opacity;
         ring.quaternion.copy(camera.quaternion);   // 环永远面向相机
       });
       const core = g.userData.core;
       if (core) {
-        const k = 1.5 + Math.sin(state.pulse * Math.PI * 6) * 0.18;
-        core.scale.setScalar(k * base);
+        // 7.5.1：核心球是测点的「位置」，位置标记不应该抖动 —— 保持静止
+        core.scale.setScalar(1.5 * base);
       }
       const stem = g.userData.stem;
       if (stem) stem.scale.set(1, 7.5 * base, 1);
     });
 
-    // ⑤ 主缆流光呼吸（低画质档整层隐藏，连 opacity 都不用算）
+    // ⑤ 主缆流光：规范 7.4.4 / 8.6 C4 已批准删除（流动性装饰不对应任何物理量）。
+    //    材质由 theme.js 的 cableFlow.visible=false 关掉，这里不再写透明度。
     if (cableFlowEnabled) {
-      const flowOp = isOffline ? 0.15 : 0.55 + 0.4 * (0.5 + 0.5 * Math.sin(now / 900));
-      bridge.cableMeshes.forEach((c) => { if (c.flow) c.flow.material.opacity = flowOp; });
+      bridge.cableMeshes.forEach((c) => {
+        if (c.flow && c.flow.material && c.flow.material.visible) c.flow.material.opacity = 0;
+      });
     }
     // ⑥ 吊索按荷载着色：走闸门，不再每 6 帧无条件重算 + 整块上传
     maybeApplyRisk(moving);

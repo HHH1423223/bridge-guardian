@@ -1,0 +1,295 @@
+/* ============================================================================
+   tokens.css —— 设计 token（全站唯一真相）
+   ----------------------------------------------------------------------------
+   来源：docs/设计规范-视觉升级.md 第二章（2.1 色彩 / 2.2 字体 / 2.3 间距 /
+         2.4 圆角 / 2.5 阴影与层级 / 2.6 动效）+ 3.1.1 骨架尺寸。
+   规则（规范 0.4 / 1.2 原则五 / 2 章开头）：
+     · 本文件之外不得出现颜色、字号、间距、圆角、阴影、时长的字面量；
+       ECharts / Three.js 这类取不到 CSS 变量的地方，必须运行时读取根元素计算样式。
+     · 语义命名，不以色相命名：写 --text-secondary，不写 --gray-600。
+     · 主题挂载：:root 持浅色取值（未设置时即浅色，D1），[data-theme="dark"] 覆盖深色。
+     · 别名关系用引用而不是重复写值：改一处即全改。
+   ========================================================================== */
+
+:root {
+  /* ======================================================================
+     2.1.1 背景层级（L0 页面底 / L1 面板 / L1.5 面板内分区 / L-1 凹陷 / L2 浮层）
+     ====================================================================== */
+  --bg-canvas: #f4f5f7;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f9fafb;
+  --bg-sunken: #edeff2;
+  --bg-raised: #ffffff;
+
+  /* 交互态背景（叠加在 L1 之上） */
+  --bg-hover: #f1f3f5;
+  --bg-active: #e9ecef;
+  --bg-scrim: rgba(22, 24, 29, 0.4);
+
+  /* ======================================================================
+     2.1.2 边框与分隔线（四级：面板外框 / 面板内分隔 / 控件边界 / 焦点环）
+     ====================================================================== */
+  --border-subtle: #e6e8eb;
+  --border-default: #dcdfe3;
+  --border-strong: #c8ccd2;
+  --border-control: #8f959e;
+
+  /* ======================================================================
+     2.1.3 主强调色（低饱和钢蓝，色相 ~216°）—— 只表达「可交互 / 当前选中」
+     ====================================================================== */
+  --accent-default: #3a68ad;
+  --accent-fill: #3a68ad;
+  --accent-fill-hover: #2f5996;
+  --accent-fill-active: #284e87;
+  --accent-soft: #ebf1fa;
+  --accent-border: #a9c0e3;
+  --text-on-accent: #ffffff;
+
+  /* ======================================================================
+     2.1.4 风险等级色（四级）与数据可信度色（中性灰）
+     每组 -main 图形 / -bg 浅底 / -text 文字 / -border 描边 / -solid-text 实心底上的字
+     ====================================================================== */
+  --risk-normal-main: #2f855a;
+  --risk-normal-bg: #eaf5ee;
+  --risk-normal-text: #1f6e44;
+  --risk-normal-border: #a8d5ba;
+
+  --risk-warn-main: #b7791f;
+  --risk-warn-bg: #fbf3e1;
+  --risk-warn-text: #8a5a00;
+  --risk-warn-border: #e8cc8a;
+
+  --risk-alarm-main: #c25a16;
+  --risk-alarm-bg: #fceee5;
+  --risk-alarm-text: #a6450d;
+  --risk-alarm-border: #edb892;
+
+  --risk-crit-main: #c8353b;
+  --risk-crit-bg: #fcebec;
+  --risk-crit-text: #b0242b;
+  --risk-crit-border: #eba9ac;
+  --risk-crit-solid-text: #ffffff;
+
+  /* 数据可信度：不可信（离线 / 未知）。不是风险等级的第五级（D7 / CONTEXT.md） */
+  --trust-unknown-main: #8a9099;
+  --trust-unknown-bg: #f1f2f4;
+  --trust-unknown-text: #5f6670;
+  --trust-unknown-border: #c8ccd2;
+  --trust-unknown-stripe: #dcdfe3;
+
+  /* ======================================================================
+     2.1.5 文字层级
+     ====================================================================== */
+  --text-primary: #16181d;
+  --text-secondary: #4b515a;
+  --text-tertiary: #6b717a;
+  --text-disabled: #a4a9b0;
+  --text-inverse: #ffffff;
+
+  /* ======================================================================
+     2.1.6 图表专用色（主数据线为墨色：颜色只留给风险语义）
+     ====================================================================== */
+  --chart-series-primary: #2b3038;
+  --chart-series-secondary: #8f959e;
+  --chart-series-tertiary: #c8ccd2;
+  --chart-area: rgba(43, 48, 56, 0.06);
+  --chart-grid: #eef0f2;
+  --chart-axis: #c8ccd2;
+  --chart-crosshair: #8f959e;
+
+  /* ======================================================================
+     2.1.7 3D 场景与 HUD 专用色（--hud-bg 是全站唯一允许半透明背景的地方）
+     ====================================================================== */
+  --hud-bg: rgba(255, 255, 255, 0.92);
+  --hud-leader: #8f959e;
+
+  /* ======================================================================
+     2.5.1 阴影（只表达「浮在上方」，不表达重要性；颜色只能是中性黑）
+     ====================================================================== */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(22, 24, 29, 0.06);
+  --shadow-md: 0 4px 12px rgba(22, 24, 29, 0.1);
+  --shadow-lg: 0 12px 32px rgba(22, 24, 29, 0.16);
+
+  /* ======================================================================
+     2.2 字体系统
+     ====================================================================== */
+  --font-ui: "Inter", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Source Han Sans SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-data: "Inter", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Source Han Sans SC", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-mono: "Cascadia Mono", "Consolas", "SF Mono", "Menlo", ui-monospace, monospace;
+
+  /* 字号阶梯（正文基准 14px，共 8 级，每级用途唯一） */
+  --fs-2xs: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 24px;
+  --fs-3xl: 32px;
+
+  /* 行高（全部是 4px 的整数倍） */
+  --lh-2xs: 16px;
+  --lh-xs: 16px;
+  --lh-sm: 20px;
+  --lh-md: 20px;
+  --lh-lg: 24px;
+  --lh-xl: 28px;
+  --lh-2xl: 28px;
+  --lh-3xl: 36px;
+
+  /* 字重（禁止 300 及以下：低分辨率工控屏与投影上会断笔） */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ======================================================================
+     2.3 间距（基础单位 4px；刻意不提供 20 / 28 / 40）
+     ====================================================================== */
+  --sp-0: 0;
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* ======================================================================
+     2.4 圆角（随元素尺寸与层级递增；禁止 12px 及以上）
+     ====================================================================== */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* ======================================================================
+     2.5.2 层级（沿用现有代码里已在用的数值，禁止使用表外数值）
+     ====================================================================== */
+  --z-base: 0;
+  --z-scene-stage: 2;
+  --z-scene-labels: 3;
+  --z-scene-hud: 4;
+  --z-scene-status: 5;
+  --z-topbar: 30;
+  --z-sidebar: 40;
+  --z-dropdown: 60;
+  --z-drawer: 80;
+  --z-tooltip: 90;
+
+  /* ======================================================================
+     2.6 动效（时长 + 缓动；禁止回弹与弹簧）
+     ====================================================================== */
+  --dur-instant: 80ms;
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-linear: linear;
+
+  /* ======================================================================
+     3.1.1 骨架尺寸
+     ====================================================================== */
+  --sh-side-w: 240px;
+  --sh-side-w-min: 64px;
+  --sh-top-h: 56px;
+  --hero-top: 56px;
+  --sim-h: 0px;
+
+  /* ======================================================================
+     8.1 别名关系（引用而非重复写值）
+     ====================================================================== */
+  --bg-selected: var(--accent-soft);
+  --border-focus: var(--accent-default);
+  --text-link: var(--accent-default);
+  --chart-label: var(--text-tertiary);
+  --chart-threshold: var(--risk-alarm-main);
+  --twin-clear: var(--bg-canvas);
+  --hud-border: var(--border-default);
+  --hud-text: var(--text-primary);
+  --hud-text-muted: var(--text-secondary);
+}
+
+/* ============================================================================
+   深色主题：同一个层级模型的另一种明度映射（2.1.8），不是第二套设计。
+   规律：浅色靠阴影区分层级，深色靠「越近越亮」区分；L0/L1/L2 每级约 +4%~+6% 亮度。
+   深色灰阶的蓝通道比红通道高 2~5 个单位（极轻微冷调，抵消液晶屏偏暖发棕）。
+   ========================================================================== */
+[data-theme="dark"] {
+  --bg-canvas: #0b0c0e;
+  --bg-surface: #121316;
+  --bg-subtle: #17181b;
+  --bg-sunken: #0e0f11;
+  --bg-raised: #1c1e22;
+
+  --bg-hover: #1a1c20;
+  --bg-active: #1f2228;
+  --bg-scrim: rgba(0, 0, 0, 0.6);
+
+  --border-subtle: #1f2125;
+  --border-default: #2a2c31;
+  --border-strong: #33363c;
+  --border-control: #60656e;
+
+  --accent-default: #7fa2da;
+  --accent-fill: #3f6bb0;
+  --accent-fill-hover: #4673b8;
+  --accent-fill-active: #3762a5;
+  --accent-soft: #18233a;
+  --accent-border: #2e4670;
+
+  --risk-normal-main: #4cb782;
+  --risk-normal-bg: #13241b;
+  --risk-normal-text: #6fcb9a;
+  --risk-normal-border: #24533a;
+
+  --risk-warn-main: #e0a82e;
+  --risk-warn-bg: #2a2112;
+  --risk-warn-text: #ebbe5c;
+  --risk-warn-border: #5c4718;
+
+  --risk-alarm-main: #e87a3a;
+  --risk-alarm-bg: #2c1a10;
+  --risk-alarm-text: #f19a66;
+  --risk-alarm-border: #63361c;
+
+  --risk-crit-main: #ef5a5f;
+  --risk-crit-bg: #2e1416;
+  --risk-crit-text: #f47f83;
+  --risk-crit-border: #6b2427;
+  --risk-crit-solid-text: #1a0b0c;
+
+  --trust-unknown-main: #6b7079;
+  --trust-unknown-bg: #1a1c20;
+  --trust-unknown-text: #9399a2;
+  --trust-unknown-border: #33363c;
+  --trust-unknown-stripe: #2a2c31;
+
+  --text-primary: #edeef0;
+  --text-secondary: #b4b8bf;
+  --text-tertiary: #80858d;
+  --text-disabled: #4e525a;
+  --text-inverse: #16181d;
+
+  --chart-series-primary: #d5d8dd;
+  --chart-series-secondary: #80858d;
+  --chart-series-tertiary: #4e525a;
+  --chart-area: rgba(213, 216, 221, 0.06);
+  --chart-grid: #1c1e22;
+  --chart-axis: #33363c;
+  --chart-crosshair: #60656e;
+
+  --hud-bg: rgba(18, 19, 22, 0.92);
+  --hud-leader: #60656e;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+}

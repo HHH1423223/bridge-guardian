@@ -7,49 +7,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>系统设置 - 桥体卫士</title>
   <meta name="theme-color" content="#ffffff">
-  <!-- 内联 SVG 图标（data URI，绿色版）：避免浏览器自动探测 /favicon.ico 产生 404 -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Cpath d='M5 23h22M5 23c3-6 7.5-9 11-9s8 3 11 9M16 14V7M9 7h14' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/static/app.css">
-  {# 共享骨架样式（侧栏/顶栏/抽屉），全站只有 _shell.html 一份定义 #}
+  <!-- 内联 SVG 图标（data URI）：避免浏览器自动探测 /favicon.ico 产生 404 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Cpath d='M5 23h22M5 23c3-6 7.5-9 11-9s8 3 11 9M16 14V7M9 7h14' fill='none' stroke='%2316181d' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  {# 共享骨架样式（侧栏/顶栏/抽屉）+ 三个全局 CSS，全站只有 _shell.html 一份定义 #}
   {{ shell.shell_head() }}
   <style>
-    /* 页面级样式：只写布局，配色一律走 app.css 第 20 节主题变量 */
-    .set-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
-    .set-grid .set-wide { grid-column: 1 / -1; }
-    .field-label { display: block; margin-top: 16px; color: var(--text-strong, #111827);
-      font-size: 14px; font-weight: 600; }
-    .field-hint { color: var(--muted, #6b7280); font-size: 12.5px; line-height: 1.7; margin-top: 4px; }
-    .field-input { width: 100%; margin-top: 6px; padding: 11px 12px; font: inherit; font-size: 15px;
-      border: 1px solid var(--border, #e5e8eb); border-radius: 8px;
-      background: var(--bg, #f6f8f9); color: var(--text, #1f2937); outline: none; }
-    .field-input:focus { border-color: var(--accent, #16a34a);
-      box-shadow: 0 0 0 3px var(--accent-glow, rgba(22, 163, 74, .18)); background: #fff; }
-    .set-actions { margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .set-actions .btn { min-height: 44px; padding: 0 22px; font-size: 14px; }
-    .risk-tip { margin-top: 16px; padding: 11px 13px; border-radius: 8px; font-size: 13px; line-height: 1.7;
-      background: var(--warn-bg, rgba(180, 83, 9, .08)); border: 1px solid var(--warn-border, rgba(180, 83, 9, .28));
-      color: var(--warn, #b45309); }
-    #message { min-height: 20px; margin-top: 12px; text-align: center; font-size: 13px; color: var(--ok, #15803d); }
-    #message.error { color: var(--crit, #be123c); }
-    /* 审计列表 */
-    .audit-list { max-height: 420px; overflow-y: auto; }
-    .audit-item { padding: 10px 2px; border-bottom: 1px dashed var(--border, #e5e8eb); font-size: 13px; }
-    .audit-item:last-child { border-bottom: none; }
-    .audit-item .t { color: var(--muted, #6b7280); font-size: 12px; }
-    .audit-item .a { color: var(--accent, #16a34a); font-weight: 600; }
-    .audit-item .d { color: var(--text, #1f2937); }
-    .audit-empty { color: var(--muted, #6b7280); text-align: center; padding: 24px 0; font-size: 13px; }
-    /* 危险操作区 */
-    .danger-zone { border: 1px solid var(--crit-border, rgba(190, 18, 60, .28)); }
-    .danger-zone .danger-title { font-size: 15px; font-weight: 700; color: var(--crit, #be123c); }
-    .danger-row { display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      padding: 12px 0; border-bottom: 1px dashed var(--border, #e5e8eb); flex-wrap: wrap; }
-    .danger-row:last-child { border-bottom: none; }
-    .danger-row .dr-main { min-width: 0; }
-    .danger-row .dr-t { font-size: 13.5px; color: var(--text-strong, #111827); font-weight: 600; }
-    .danger-row .dr-d { font-size: 12.5px; color: var(--muted, #6b7280); line-height: 1.6; margin-top: 2px; }
-    .danger-row .btn { min-height: 44px; padding: 0 18px; }
-    @media (max-width: 900px) { .set-grid { grid-template-columns: 1fr; } }
+    /* 本页只写布局：区域栅格、固定宽度、排列顺序。颜色/字号/圆角/阴影一律由
+       tokens.css + components.css 提供（规范 5.0）。 */
+
+    /* 系统设置的内容最大宽度 1200px，并在 1600px 容器内左对齐（3.4.2） */
+    .set-page { max-width: 1200px; margin-right: auto; }
+
+    .set-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .set-grid > .card { display: flex; flex-direction: column; }
+    .set-grid > .card > h3 { margin-bottom: var(--sp-1); }
+    /* 面板说明距标题 4px、距第一个字段 24px */
+    .set-grid > .card > .field-hint { margin-bottom: var(--sp-6); }
+
+    /* 字段：标签 → 输入框 → 帮助文字（5.7.2）；字段间距 24px */
+    .set-field { display: flex; flex-direction: column; }
+    .set-field + .set-field { margin-top: var(--sp-6); }
+    .set-field .field-label { margin-bottom: var(--sp-2); }
+    .set-field .field-hint { margin-top: var(--sp-1); }
+    /* 输入框宽 240px（不占满面板宽度：宽度应当暗示内容长度） */
+    .set-input { position: relative; width: 240px; max-width: 100%; }
+    .set-input .field-input { width: 100%; margin-top: 0; }
+    .set-input .set-suffix {
+      position: absolute; right: var(--sp-3); top: 50%; transform: translateY(-50%);
+      pointer-events: none; white-space: nowrap;
+    }
+    .set-input .has-suffix { padding-right: 84px; }
+    .set-input .has-suffix.short { padding-right: 34px; }
+
+    /* 保存行：说明在按钮左侧，与按钮垂直居中，间距 12px */
+    .set-actions { justify-content: flex-end; }
+    .set-actions #message { min-height: 0; margin: 0; display: inline-flex; align-items: center; gap: var(--sp-2); }
+    .set-actions #message.is-ok::before {
+      content: ""; width: 8px; height: 8px; border-radius: var(--radius-full);
+      background: var(--risk-normal-main); flex: 0 0 auto;
+    }
+    .set-actions #message.is-fading { opacity: 0; transition: opacity var(--dur-slow) var(--ease-standard); }
+
+    /* 危险操作：每行 64px，操作名与说明在左、按钮在右（5.7.4） */
+    .danger-zone .field-hint { margin-bottom: var(--sp-4); }
+    .danger-row .dr-main { flex: 1 1 320px; }
+
+    /* 最近变更记录：紧凑表格占满面板剩余高度，内部滚动 */
+    .audit-list { flex: 1 1 auto; min-height: 200px; max-height: 520px; overflow: auto; }
+    .audit-list table { width: 100%; }
+    .audit-col-t { width: 132px; }
+    .audit-col-a { width: 96px; }
+    .audit-nowrap { white-space: nowrap; }
+    .audit-arrow { color: var(--text-tertiary); padding: 0 var(--sp-1); }
+
+    @media (max-width: 1023px) {
+      .set-grid { grid-template-columns: minmax(0, 1fr); }
+    }
   </style>
 </head>
 <body class="sh-body">
@@ -64,7 +77,7 @@
     {{ shell.shell_topbar('系统设置', '监测参数 · 变更审计 · 数据清理入口', 'settings') }}
 
     <main class="sh-content">
-      <div class="sh-page">
+      <div class="sh-page set-page">
 
         <div class="set-grid">
 
@@ -73,35 +86,46 @@
             <h3>监测参数</h3>
             <p class="field-hint">报警阈值与采集周期，保存后立即生效并写入变更审计（可追溯）。</p>
             <form id="settingsForm">
-              <label class="field-label" for="threshold">报警阈值（{{ unit }}）</label>
-              <p class="field-hint">当应变指标超过该阈值时触发分级报警（预警 1.0× / 报警 1.1× / 严重报警 1.2×）。
-                数值为相对应变指标（无量纲），非工程微应变，范围 1–200。</p>
-              <input class="field-input" id="threshold" type="number" min="1" max="200" step="0.1" required>
+              <div class="set-field">
+                <label class="field-label" for="threshold">报警阈值</label>
+                <div class="set-input">
+                  <input class="field-input has-suffix" id="threshold" type="number" min="1" max="200" step="0.1" required>
+                  <span class="set-suffix field-hint">{{ unit }}</span>
+                </div>
+                <p class="field-hint">当应变指标超过该阈值时触发分级报警（预警 1.0× / 报警 1.1× / 严重报警 1.2×）。
+                  数值为相对应变指标（无量纲），非工程微应变，范围 1–200。</p>
+              </div>
 
-              <label class="field-label" for="interval">采集周期（秒）</label>
-              <p class="field-hint">两次采样的时间间隔，决定数据刷新频率与规则引擎的评估节奏。范围 0.1–60 秒。</p>
-              <input class="field-input" id="interval" type="number" min="0.1" max="60" step="0.1" required>
+              <div class="set-field">
+                <label class="field-label" for="interval">采集周期</label>
+                <div class="set-input">
+                  <input class="field-input has-suffix short" id="interval" type="number" min="0.1" max="60" step="0.1" required>
+                  <span class="set-suffix field-hint">秒</span>
+                </div>
+                <p class="field-hint">两次采样的时间间隔，决定数据刷新频率与规则引擎的评估节奏。范围 0.1–60 秒。</p>
+              </div>
 
-              <div class="risk-tip">⚠ 风险提示：阈值过低会导致频繁报警，过高则可能漏报；修改后<b>立即生效</b>并写入变更审计，可追溯。</div>
+              <div class="risk-tip">风险提示：阈值过低会导致频繁报警，过高则可能漏报；修改后<b>立即生效</b>并写入变更审计，可追溯。</div>
+
               <div class="set-actions">
-                <button class="btn btn-blue" type="submit">保存设置</button>
+                <p id="message" role="status"></p>
+                <button class="btn btn-blue" id="btnSave" type="submit">保存设置</button>
               </div>
             </form>
-            <p id="message" role="status"></p>
           </section>
 
           <!-- 变更审计：谁在何时改了什么参数（数据来自 /api/audit） -->
           <section class="card">
             <h3>最近变更记录</h3>
             <p class="field-hint">谁在何时改了什么参数、清了什么数据，全程留痕（数据来自 <b>/api/audit</b>）。</p>
-            <div class="audit-list" id="auditList">
-              <div class="audit-empty">加载中…</div>
+            <div class="audit-list table-wrap" id="auditList">
+              <p class="audit-empty">加载中…</p>
             </div>
           </section>
 
-          <!-- 数据清理入口（自大屏页搬家：清空数据 / 清空报警；POST 带 X-CSRF-Token） -->
+          <!-- 数据清理入口（清空数据 / 清空报警；POST 带 X-CSRF-Token，二次确认需输入「清空」） -->
           <section class="card danger-zone set-wide">
-            <div class="danger-title">数据清理</div>
+            <div class="danger-title">危险操作</div>
             <p class="field-hint">这里只清除数据库中的历史记录，不影响采集线程继续运行；
               清理动作会写入审计，模拟演示数据与真实串口数据一视同仁地被清除（不区分、不保留）。</p>
 
@@ -110,13 +134,13 @@
                 <div class="dr-t">清空采样数据</div>
                 <div class="dr-d">清除内存实时曲线与 SQLite 中的全部采样点（含心跳记录）。清除后累计采样归零。</div>
               </div>
-              <button class="btn btn-ghost" id="btnClearData" type="button">清空数据</button>
+              <button class="btn btn-red" id="btnClearData" type="button">清空数据</button>
             </div>
 
             <div class="danger-row">
               <div class="dr-main">
                 <div class="dr-t">清空报警记录</div>
-                <div class="dr-d">清除内存报警缓存与 SQLite 中的全部报警（含已处理记录）。</div>
+                <div class="dr-d">清除内存报警缓存与 SQLite 中的全部报警（含已处理记录），会破坏处置闭环的历史追溯。</div>
               </div>
               <button class="btn btn-red" id="btnClearAlarms" type="button">清空报警</button>
             </div>
@@ -124,9 +148,10 @@
 
         </div>
 
-        <p style="font-size:11.5px;color:var(--faint,#9ca3af);line-height:1.7;margin-top:16px">
-          单位口径：{{ unit }}（相对应变指标，无量纲，非工程微应变）· 参数与清理操作全部经 <b>/api/settings</b>、
-          <b>/api/clear_data</b>、<b>/api/clear_alarms</b> 落库，并在 <b>/api/audit</b> 留痕。
+        <p class="pg-foot">
+          <span>单位口径：{{ unit }}（相对应变指标，无量纲，非工程微应变）· 参数与清理操作全部经
+            <b>/api/settings</b>、<b>/api/clear_data</b>、<b>/api/clear_alarms</b> 落库，并在
+            <b>/api/audit</b> 留痕。</span>
         </p>
 
       </div>
@@ -138,14 +163,38 @@
   /* ====================================================================
      /settings 页面脚本
      保留：参数表单读取/保存（/api/settings，POST 带 X-CSRF-Token）、审计记录（/api/audit）
-     新增：清空数据 / 清空报警入口（自大屏页搬家，两个 POST 的路径、CSRF 头、confirm 口径完全一致）
+     规范化改动（8.6 C2 / C3）：
+       C2 无修改时保存按钮禁用（输入值与已保存值不同才可用）
+       C3 清空操作要求输入确认词「清空」——替换原生的 confirm()
      ==================================================================== */
   const CSRF_TOKEN = {{ csrf_token|tojson }};
   const messageElement = document.getElementById('message');
+  const saveButton = document.getElementById('btnSave');
+  const thresholdInput = document.getElementById('threshold');
+  const intervalInput = document.getElementById('interval');
+
+  /* 已保存的基准值：保存按钮的禁用状态由「当前输入 vs 基准值」决定 */
+  const saved = { threshold: null, interval: null };
+  let messageTimer = null;
+
+  function isDirty() {
+    if (saved.threshold === null) return false;
+    return Number(thresholdInput.value) !== saved.threshold
+        || Number(intervalInput.value) !== saved.interval;
+  }
+  function syncSaveState() { saveButton.disabled = !isDirty(); }
 
   function showMessage(message, isError = false) {
+    if (messageTimer) { window.clearTimeout(messageTimer); messageTimer = null; }
     messageElement.textContent = message;
-    messageElement.className = isError ? 'error' : '';
+    messageElement.className = isError ? 'error' : (message ? 'is-ok' : '');
+    if (!isError && message) {
+      messageTimer = window.setTimeout(function () {
+        messageElement.classList.add('is-fading');
+        messageElement.textContent = '';
+        messageElement.className = '';
+      }, 3000);
+    }
   }
 
   const ACTION_MAP = {
@@ -158,14 +207,28 @@
 
   function escapeHtml(v){ return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+  /* 内容列里的「阈值 100.0 → 120.0」：箭头与数值分别着色/等宽（5.7.3） */
+  function formatDetail(detail) {
+    return escapeHtml(detail).replace(/→/g, '<span class="audit-arrow">→</span>');
+  }
+
+  /* 5.7.3：变更记录时间列用 MM-DD HH:mm（紧凑表格不换行） */
+  function shortStamp(ts) {
+    const s = String(ts || '');
+    return s.length >= 16 ? s.slice(5, 16) : s;
+  }
+
   async function loadSettings() {
     try {
       const response = await fetch('/api/settings');
       if (response.status === 401) { window.location.href = '/login'; return; }
       if (!response.ok) throw new Error(`请求失败：${response.status}`);
       const s = await response.json();
-      document.getElementById('threshold').value = s.threshold;
-      document.getElementById('interval').value = s.interval;
+      thresholdInput.value = s.threshold;
+      intervalInput.value = s.interval;
+      saved.threshold = Number(s.threshold);
+      saved.interval = Number(s.interval);
+      syncSaveState();
     } catch (e) { console.error(e); showMessage('读取设置失败。', true); }
   }
 
@@ -175,19 +238,38 @@
       if (response.status === 401) { window.location.href = '/login'; return; }
       if (!response.ok) throw new Error(`请求失败：${response.status}`);
       const rows = await response.json();
-      const html = rows.map(r =>
-        `<div class="audit-item">
-          <div class="t">${escapeHtml(r.ts)} · ${escapeHtml(r.actor)}</div>
-          <div><span class="a">${ACTION_MAP[r.action] || escapeHtml(r.action)}</span> <span class="d">${escapeHtml(r.detail || '')}</span></div>
-        </div>`).join('');
-      document.getElementById('auditList').innerHTML = html || '<div class="audit-empty">暂无变更记录</div>';
-    } catch (e) { console.error(e); document.getElementById('auditList').innerHTML = '<div class="audit-empty">审计记录加载失败</div>'; }
+      if (!rows.length) {
+        document.getElementById('auditList').innerHTML =
+          '<p class="audit-empty">暂无变更记录</p>';
+        return;
+      }
+      const body = rows.map(r =>
+        `<tr>
+          <td class="num audit-nowrap">${escapeHtml(shortStamp(r.ts))}</td>
+          <td>${escapeHtml(r.actor)}</td>
+          <td><b>${ACTION_MAP[r.action] || escapeHtml(r.action)}</b> ${formatDetail(r.detail || '')}</td>
+        </tr>`).join('');
+      document.getElementById('auditList').innerHTML =
+        `<table class="data-table bg-table--compact">
+          <thead><tr>
+            <th class="audit-col-t">时间</th><th class="audit-col-a">操作人</th><th>内容</th>
+          </tr></thead>
+          <tbody>${body}</tbody>
+        </table>`;
+    } catch (e) {
+      console.error(e);
+      document.getElementById('auditList').innerHTML = '<p class="audit-empty">审计记录加载失败</p>';
+    }
   }
+
+  thresholdInput.addEventListener('input', syncSaveState);
+  intervalInput.addEventListener('input', syncSaveState);
 
   document.getElementById('settingsForm').addEventListener('submit', async event => {
     event.preventDefault();
-    const thresholdValue = Number(document.getElementById('threshold').value);
-    const intervalValue = Number(document.getElementById('interval').value);
+    const thresholdValue = Number(thresholdInput.value);
+    const intervalValue = Number(intervalInput.value);
+    saveButton.classList.add('is-loading');
     try {
       const response = await fetch('/api/settings', {
         method: 'POST',
@@ -197,35 +279,84 @@
       if (response.status === 401) { window.location.href = '/login'; return; }
       const result = await response.json();
       if (!response.ok) throw new Error(result.error);
-      showMessage('设置已保存并立即生效。');
+      saved.threshold = thresholdValue;
+      saved.interval = intervalValue;
+      syncSaveState();
+      showMessage('已保存，立即生效');
       loadAudit(); // 刷新审计记录
     } catch (e) { showMessage(e.message || '保存设置失败。', true); }
+    finally { saveButton.classList.remove('is-loading'); }
   });
 
-  /* 数据清理（自大屏页搬家，路径 / CSRF 头 / 确认文案与原来一致） */
-  async function clearData() {
-    if (!confirm('确定清除当前数据和历史数据记录吗？')) return;
-    try {
-      const r = await fetch('/api/clear_data', { method: 'POST', headers: { 'X-CSRF-Token': CSRF_TOKEN } });
-      if (r.status === 401) { window.location.href = '/login'; return; }
-      if (!r.ok) throw new Error(`请求失败：${r.status}`);
-      showMessage('采样数据已清除。');
-      loadAudit();
-    } catch (e) { console.error(e); showMessage('清除数据失败。', true); }
+  /* ====================================================================
+     二次确认对话框（5.8 / C3）：必须输入「清空」两个字才能启用确认按钮
+     ==================================================================== */
+  function confirmClear(options) {
+    return new Promise(function (resolve) {
+      const scrim = document.createElement('div');
+      scrim.className = 'bg-dialog-scrim';
+      scrim.innerHTML =
+        '<div class="bg-dialog" role="dialog" aria-modal="true" aria-labelledby="bgDlgTitle">' +
+          '<div class="bg-dialog__title" id="bgDlgTitle">' + escapeHtml(options.title) + '</div>' +
+          '<div class="bg-dialog__body">' + options.body +
+            '<div class="set-input" style="width:100%;margin-top:var(--sp-4)">' +
+              '<input class="field-input" id="bgDlgInput" type="text" autocomplete="off" ' +
+                'placeholder="在此输入「清空」" style="width:100%;text-align:left">' +
+            '</div>' +
+          '</div>' +
+          '<div class="bg-dialog__actions">' +
+            '<button class="btn btn-ghost" type="button" data-act="cancel">取消</button>' +
+            '<button class="btn btn-red bg-btn--solid" type="button" data-act="ok" disabled>确认清空</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(scrim);
+      const input = scrim.querySelector('#bgDlgInput');
+      const ok = scrim.querySelector('[data-act="ok"]');
+      const cancel = scrim.querySelector('[data-act="cancel"]');
+
+      function close(result) {
+        document.removeEventListener('keydown', onKey);
+        scrim.remove();
+        resolve(result);
+      }
+      function onKey(e) {
+        if (e.key === 'Escape') close(false);
+        if (e.key === 'Enter' && !ok.disabled) close(true);
+      }
+      input.addEventListener('input', function () { ok.disabled = input.value.trim() !== '清空'; });
+      cancel.addEventListener('click', function () { close(false); });
+      ok.addEventListener('click', function () { close(true); });
+      /* 危险确认对话框：点击遮罩不关闭（防止误触后以为已取消） */
+      document.addEventListener('keydown', onKey);
+      try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
+      try { cancel.focus({ preventScroll: true }); input.focus(); } catch (e) { /* 忽略 */ }
+    });
   }
 
-  async function clearAlarms() {
-    if (!confirm('确定清除当前报警和历史报警记录吗？')) return;
+  async function doClear(url, title, body, doneText) {
+    const confirmed = await confirmClear({ title: title, body: body });
+    if (!confirmed) return;
     try {
-      const r = await fetch('/api/clear_alarms', { method: 'POST', headers: { 'X-CSRF-Token': CSRF_TOKEN } });
+      const r = await fetch(url, { method: 'POST', headers: { 'X-CSRF-Token': CSRF_TOKEN } });
       if (r.status === 401) { window.location.href = '/login'; return; }
       if (!r.ok) throw new Error(`请求失败：${r.status}`);
-      showMessage('报警记录已清除。');
+      showMessage(doneText);
       loadAudit();
-    } catch (e) { console.error(e); showMessage('清除报警失败。', true); }
+    } catch (e) { console.error(e); showMessage('操作失败，请稍后重试。', true); }
   }
-  document.getElementById('btnClearData').addEventListener('click', clearData);
-  document.getElementById('btnClearAlarms').addEventListener('click', clearAlarms);
+
+  document.getElementById('btnClearData').addEventListener('click', function () {
+    doClear('/api/clear_data',
+      '确认清空采样数据？',
+      '将删除内存实时曲线与 SQLite 中的<strong>全部采样点</strong>（含心跳记录），累计采样归零。<br>此操作不可恢复，但不会中断采集线程。',
+      '采样数据已清空');
+  });
+  document.getElementById('btnClearAlarms').addEventListener('click', function () {
+    doClear('/api/clear_alarms',
+      '确认清空报警记录？',
+      '将删除内存报警缓存与 SQLite 中的<strong>全部报警</strong>（含已处理记录）。<br>这会破坏处置闭环的历史追溯，且不可恢复。',
+      '报警记录已清除');
+  });
 
   /* 顶栏状态区：与其它页面口径一致的连接状态与待处置报警数（数据来自 /api/data） */
   async function shellStatus() {
@@ -250,7 +381,7 @@
   window.setInterval(shellStatus, 1000);
 </script>
 
-{# 共享骨架行为：桌面收起/展开 + localStorage 记忆 + 移动端抽屉 #}
+{# 共享骨架行为：桌面收起/展开 + localStorage 记忆 + 移动端抽屉 + 主题切换 #}
 {{ shell.shell_scripts() }}
 
 </body>

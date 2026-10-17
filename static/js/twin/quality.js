@@ -82,7 +82,9 @@ export const ULTRA_LOW_PATIENCE_MS = 5000;  // 极低档仍不达标持续 5s �
 export const STORAGE_KEYS = {
   tier: 'twin.qualityTier',
   targetFps: 'twin.targetFps',
-  theme: 'twin.theme',
+  /* 规范 7.7 第 3 条：主题键统一为 bg.theme（与 bg.sidebar.collapsed 同一命名空间），
+     由 _shell.html 在 <head> 里读写；3D 场景创建时直接沿用，不再自己一套键名。 */
+  theme: 'bg.theme',
 };
 
 /** 刷新率估算的归一化候选（契约 §4.1） */
